@@ -12,7 +12,7 @@ public class PetStoreServiceImpl implements PetStoreService {
 	private final PetRespository petRepository;
 
 	public PetStoreServiceImpl() {
-		petRespository = null;
+		petRepository = null;
 	}
 
 	public PetStoreServiceImpl(PetRespository aPetRepository) {
