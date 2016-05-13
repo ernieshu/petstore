@@ -1,19 +1,40 @@
 package com.iwd.petstore_services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.iwd.petstore_services.domain.Pet;
+
 @Controller
-@EnableAutoConfiguration
+@SpringBootApplication
 public class AppController {
 
-	@RequestMapping("/")
+	@Autowired
+	PetStoreService petStoreService;
+
+	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.GET })
 	@ResponseBody
-	String home() {
-		return "Hello World!";
+	@Transactional(readOnly = true)
+	Pet get(@PathVariable Long petId) {
+		return petStoreService.get(petId);
+	}
+
+	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
+	void create(Pet pet) {
+		petStoreService.add(pet);
+	}
+
+	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.DELETE })
+	@ResponseBody
+	void delete(@PathVariable Long petId) {
+		petStoreService.delete(petId);
 	}
 
 	public static void main(String[] args) {
