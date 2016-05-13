@@ -9,20 +9,34 @@ import com.iwd.petstore_services.domain.Pet;
 @Transactional
 public class PetStoreServiceImpl implements PetStoreService {
 
-	public Pet get(Long petId) {
-		Pet returnPet = new Pet();
-		returnPet.setId(petId);
+	private final PetRespository petRepository;
 
-		return returnPet;
+	public PetStoreServiceImpl() {
+		petRespository = null;
+	}
+
+	public PetStoreServiceImpl(PetRespository aPetRepository) {
+		petRepository = aPetRepository;
+	}
+
+	public Pet get(Long petId) {
+		return petRepository.findOne(petId);
 	}
 
 	public void add(Pet petToBeInserted) {
-		// TODO Auto-generated method stub
+		Pet pet = petRepository.save(petToBeInserted);
 
+		if (pet != null) {
+			// TODO do something!
+		} else {
+			// TODO this is an error - do something else!
+		}
 	}
 
 	public void delete(Long petId) {
-		// TODO Auto-generated method stub
 
+		Pet petToBeDeleted = petRepository.findOne(petId);
+
+		petRepository.delete(petToBeDeleted);
 	}
 }
