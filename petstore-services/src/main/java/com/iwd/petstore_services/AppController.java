@@ -30,6 +30,7 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
+	@ResponseBody
 	void create(Pet pet) {
 		petStoreService.add(pet);
 	}
