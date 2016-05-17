@@ -20,8 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iwd.petstore_services.domain.Category;
 import com.iwd.petstore_services.domain.Pet;
-import com.iwd.petstore_services.domain.PetPhotoURLs;
+import com.iwd.petstore_services.domain.PetPhotoURL;
 import com.iwd.petstore_services.domain.PetStatus;
+import com.iwd.petstore_services.domain.PetURLCompositeKey;
 import com.iwd.petstore_services.domain.Tag;
 
 @Controller
@@ -59,10 +60,12 @@ public class AppController {
 		category.setName("Category 1");
 		pet.setCategory(category);
 		pet.setName("doggie");
-		PetPhotoURLs petPhotoUrl = new PetPhotoURLs();
-		petPhotoUrl.setPetId(pet.getId());
-		petPhotoUrl.setPhotoURL("string");
-		Set<PetPhotoURLs> photoSet = new HashSet<PetPhotoURLs>();
+		PetPhotoURL petPhotoUrl = new PetPhotoURL();
+		PetURLCompositeKey petURLCompositeKey = new PetURLCompositeKey();
+		petURLCompositeKey.setPetId(pet.getId());
+		petURLCompositeKey.setPhotoURL("string");
+
+		Set<PetPhotoURL> photoSet = new HashSet<PetPhotoURL>();
 		photoSet.add(petPhotoUrl);
 		// pet.setPhotoURLs(photoSet);
 		Tag tag = new Tag();
@@ -78,7 +81,6 @@ public class AppController {
 		} else {
 
 			Pet returnedPet = petStoreService.add(pet);
-			System.err.println(returnedPet.getStatus());
 			if (returnedPet == null) {
 				return new ResponseEntity<Pet>(HttpStatus.INTERNAL_SERVER_ERROR);
 			} else {

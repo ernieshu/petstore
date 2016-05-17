@@ -15,7 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.iwd.petstore_services.domain.Pet;
-import com.iwd.petstore_services.domain.PetPhotoURLs;
+import com.iwd.petstore_services.domain.PetPhotoURL;
+import com.iwd.petstore_services.domain.PetURLCompositeKey;
 
 /**
  * Unit test for simple App.
@@ -64,10 +65,12 @@ public class AppControllerTest {
 		Pet validPet = new Pet();
 		validPet.setId(1);
 		validPet.setName("petName");
-		HashSet<PetPhotoURLs> photoUrls = new HashSet<PetPhotoURLs>();
-		PetPhotoURLs petPhotoURL = new PetPhotoURLs();
-		petPhotoURL.setPetId(1);
-		petPhotoURL.setPhotoURL("string");
+		HashSet<PetPhotoURL> photoUrls = new HashSet<PetPhotoURL>();
+		PetPhotoURL petPhotoURL = new PetPhotoURL();
+		PetURLCompositeKey petURLCompositeKey = new PetURLCompositeKey();
+		petURLCompositeKey.setPetId(1);
+		petURLCompositeKey.setPhotoURL("string");
+		petPhotoURL.setPetURLCompositeKey(petURLCompositeKey);
 		photoUrls.add(petPhotoURL);
 		// validPet.setPhotoURLs(photoUrls);
 		return validPet;

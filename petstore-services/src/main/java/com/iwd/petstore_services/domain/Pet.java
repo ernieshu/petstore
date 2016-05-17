@@ -29,12 +29,12 @@ public class Pet implements Serializable {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
-	// @OneToMany(orphanRemoval = true)
-	// @JoinColumn(name = "PET_ID")
-	// private Set<PetPhotoURLs> photoURLs;
-	//
+	// @OneToMany(cascade = CascadeType.ALL, mappedBy =
+	// "petURLCompositeKey.petId")
+	// private Set<PetPhotoURL> photoURLs;
+
 	@ManyToMany
-	@JoinTable(name = "PET_TAGS", joinColumns = @JoinColumn(name = "PET_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
+	@JoinTable(joinColumns = @JoinColumn(name = "PET_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
 	private Set<Tag> tags;
 
 	public Integer getId() {
@@ -69,14 +69,14 @@ public class Pet implements Serializable {
 		this.category = category;
 	}
 
-	// public Set<PetPhotoURLs> getPhotoURLs() {
+	// public Set<PetPhotoURL> getPhotoURLs() {
 	// return photoURLs;
 	// }
 	//
-	// public void setPhotoURLs(Set<PetPhotoURLs> photoURLs) {
+	// public void setPhotoURLs(Set<PetPhotoURL> photoURLs) {
 	// this.photoURLs = photoURLs;
 	// }
-	//
+
 	public Set<Tag> getTags() {
 		return tags;
 	}
