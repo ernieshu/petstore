@@ -34,27 +34,22 @@ public class AppController {
 	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.GET })
 	@ResponseBody
 	@Transactional(readOnly = true)
-	ResponseEntity<String> get(@PathVariable Integer petId) {
+	ResponseEntity<Pet> get(@PathVariable Integer petId) {
 		if (petId < 0) {
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Pet>(HttpStatus.BAD_REQUEST);
 		}
 
 		Pet returnPet = petStoreService.get(petId);
 		if (returnPet == null) {
-			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<String>(returnPet.toString(), HttpStatus.OK); // FIXME
-																				// use
-																				// JSON
-																				// rather
-																				// than
-																				// toString
+		return new ResponseEntity<Pet>(returnPet, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
 	@ResponseBody
-	ResponseEntity<String> create(Pet pet) {
+	ResponseEntity<Pet> create(Pet pet) {
 
 		// FIXME - below code is only for testing purposes
 
@@ -79,32 +74,15 @@ public class AppController {
 		pet.setStatus(PetStatus.AVAILABLE);
 
 		if (!validatePet(pet)) {
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Pet>(HttpStatus.BAD_REQUEST);
 		} else {
 
 			Pet returnedPet = petStoreService.add(pet);
+			System.err.println(returnedPet.getStatus());
 			if (returnedPet == null) {
-				return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); // FIXME
-				// this
-				// should
-				// be
-				// sending
-				// JSON
-				// rather
-				// than
-				// toString
-				// representation
+				return new ResponseEntity<Pet>(HttpStatus.INTERNAL_SERVER_ERROR);
 			} else {
-				return new ResponseEntity<String>(returnedPet.toString(), HttpStatus.OK); // FIXME
-				// this
-				// should
-				// be
-				// sending
-				// JSON
-				// rather
-				// than
-				// toString
-				// representation
+				return new ResponseEntity<Pet>(returnedPet, HttpStatus.OK);
 			}
 		}
 

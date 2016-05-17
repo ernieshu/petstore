@@ -54,7 +54,7 @@ public class Pet implements Serializable {
 	}
 
 	public PetStatus getStatus() {
-		return PetStatus.valueOf(statusName);
+		return PetStatus.getEnum(statusName);
 	}
 
 	public void setStatus(PetStatus status) {

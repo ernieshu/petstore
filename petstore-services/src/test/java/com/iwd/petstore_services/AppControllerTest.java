@@ -31,21 +31,21 @@ public class AppControllerTest {
 	@Test
 	public void getPet_InvalidInput() {
 		Integer invalidInput = -5;
-		ResponseEntity<String> testOutput = fixture.get(invalidInput);
+		ResponseEntity<Pet> testOutput = fixture.get(invalidInput);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 
 	@Test
 	public void getPet_NotFound() {
 		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(null);
-		ResponseEntity<String> testOutput = fixture.get(5);
+		ResponseEntity<Pet> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 
 	@Test
 	public void getPet_validCase() {
 		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(new Pet());
-		ResponseEntity<String> testOutput = fixture.get(5);
+		ResponseEntity<Pet> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
 
@@ -55,7 +55,7 @@ public class AppControllerTest {
 	public void createPet_validCase() {
 		Pet validPet = createValidPet();
 		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(validPet);
-		ResponseEntity<String> testOutput = fixture.create(validPet);
+		ResponseEntity<Pet> testOutput = fixture.create(validPet);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
 	}
@@ -78,14 +78,14 @@ public class AppControllerTest {
 		Pet invalidPet = createValidPet();
 		invalidPet.setName(null);
 		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(invalidPet);
-		ResponseEntity<String> testOutput = fixture.create(invalidPet);
+		ResponseEntity<Pet> testOutput = fixture.create(invalidPet);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 
 	@Test
 	public void createPet_invalidCase_systemFailure() {
 		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(null);
-		ResponseEntity<String> testOutput = fixture.create(createValidPet());
+		ResponseEntity<Pet> testOutput = fixture.create(createValidPet());
 		assertEquals(testOutput.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
