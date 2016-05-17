@@ -46,7 +46,7 @@ public class AppControllerTest {
 	public void getPet_validCase() {
 		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(new Pet());
 		ResponseEntity<String> testOutput = fixture.get(5);
-		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
+		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
 
 	}
@@ -56,7 +56,7 @@ public class AppControllerTest {
 		Pet validPet = createValidPet();
 		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(validPet);
 		ResponseEntity<String> testOutput = fixture.create(validPet);
-		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
+		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
 	}
 
@@ -95,7 +95,7 @@ public class AppControllerTest {
 		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(validPet);
 		Mockito.doNothing().when(petStoreService).delete(Mockito.any(Pet.class));
 		ResponseEntity<String> testOutput = fixture.delete(validPet.getId());
-		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
+		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 	}
 
 	@Test

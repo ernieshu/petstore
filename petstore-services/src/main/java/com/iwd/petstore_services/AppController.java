@@ -44,12 +44,12 @@ public class AppController {
 			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<String>(returnPet.toString(), HttpStatus.ACCEPTED); // FIXME
-																						// use
-																						// JSON
-																						// rather
-																						// than
-																						// toString
+		return new ResponseEntity<String>(returnPet.toString(), HttpStatus.OK); // FIXME
+																				// use
+																				// JSON
+																				// rather
+																				// than
+																				// toString
 	}
 
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
@@ -95,7 +95,7 @@ public class AppController {
 				// toString
 				// representation
 			} else {
-				return new ResponseEntity<String>(returnedPet.toString(), HttpStatus.ACCEPTED); // FIXME
+				return new ResponseEntity<String>(returnedPet.toString(), HttpStatus.OK); // FIXME
 				// this
 				// should
 				// be
@@ -123,7 +123,7 @@ public class AppController {
 
 		petStoreService.delete(returnPet);
 
-		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	@Bean
@@ -146,4 +146,5 @@ public class AppController {
 		// }
 		return true;
 	}
+
 }
