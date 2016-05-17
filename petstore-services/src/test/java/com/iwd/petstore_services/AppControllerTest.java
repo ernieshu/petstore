@@ -91,6 +91,23 @@ public class AppControllerTest {
 
 	@Test
 	public void deletePet_validCase() {
-		// Mockito.when(petStoreService.delete(Mockito.anyLong())).
+		Pet validPet = createValidPet();
+		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(validPet);
+		Mockito.doNothing().when(petStoreService).delete(Mockito.anyLong());
+		ResponseEntity<String> testOutput = fixture.delete(validPet.getId());
+		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
+	}
+
+	@Test
+	public void deletePet_invalidCase_notFound() {
+		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(null);
+		ResponseEntity<String> testOutput = fixture.delete((long) 1);
+		assertEquals(testOutput.getStatusCode(), HttpStatus.NOT_FOUND);
+	}
+
+	@Test
+	public void deletePet_invalidCase_invalidInput() {
+		ResponseEntity<String> testOutput = fixture.delete((long) -1);
+		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 }

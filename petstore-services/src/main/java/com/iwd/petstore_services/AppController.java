@@ -84,7 +84,7 @@ public class AppController {
 	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.DELETE })
 	@ResponseBody
 	ResponseEntity<String> delete(@PathVariable Long petId) {
-		if (petId == 0) {
+		if (petId < 0) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 		Pet returnPet = petStoreService.get(petId);
