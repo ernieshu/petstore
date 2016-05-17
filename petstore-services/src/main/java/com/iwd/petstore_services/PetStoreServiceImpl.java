@@ -17,33 +17,33 @@ public class PetStoreServiceImpl implements PetStoreService {
 		petRepository = aPetRepository;
 	}
 
+	@Override
 	public Pet get(Long petId) {
 		return petRepository.findOne(petId);
 	}
 
+	@Override
 	public Pet add(Pet petToBeInserted) {
-		
+
 		Pet pet = petRepository.save(petToBeInserted);
 
 		if (pet != null) {
 			return pet;
 		} else {
-			// TODO this is an error - do something else!
 			return null;
 		}
 	}
 
+	@Override
 	public void delete(Long petId) {
 
 		Pet petToBeDeleted = petRepository.findOne(petId);
 
-		if (petToBeDeleted!=null) {
+		if (petToBeDeleted != null) {
 			petRepository.delete(petToBeDeleted);
-		}
-		else {
+		} else {
 			// TODO - put an error log here!
 		}
 	}
-	
 
 }
