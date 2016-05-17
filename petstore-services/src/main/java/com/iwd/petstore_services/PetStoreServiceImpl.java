@@ -35,15 +35,8 @@ public class PetStoreServiceImpl implements PetStoreService {
 	}
 
 	@Override
-	public void delete(Long petId) {
-
-		Pet petToBeDeleted = petRepository.findOne(petId);
-
-		if (petToBeDeleted != null) {
-			petRepository.delete(petToBeDeleted);
-		} else {
-			// TODO - put an error log here!
-		}
+	public void delete(Pet petToBeDeleted) {
+		petRepository.delete(petToBeDeleted);
 	}
 
 }

@@ -93,7 +93,7 @@ public class AppControllerTest {
 	public void deletePet_validCase() {
 		Pet validPet = createValidPet();
 		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(validPet);
-		Mockito.doNothing().when(petStoreService).delete(Mockito.anyLong());
+		Mockito.doNothing().when(petStoreService).delete(Mockito.any(Pet.class));
 		ResponseEntity<String> testOutput = fixture.delete(validPet.getId());
 		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
 	}

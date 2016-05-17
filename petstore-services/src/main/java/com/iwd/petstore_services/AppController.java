@@ -92,11 +92,9 @@ public class AppController {
 			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 		}
 
-		petStoreService.delete(petId);
+		petStoreService.delete(returnPet);
 
-		return new ResponseEntity<String>(HttpStatus.ACCEPTED); // FIXME use
-																// JSON rather
-																// than toString
+		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
 	}
 
 	@Bean

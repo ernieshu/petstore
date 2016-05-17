@@ -8,6 +8,6 @@ public interface PetStoreService {
 
 	public Pet add(Pet petToBeInserted);
 
-	public void delete(Long petId);
+	public void delete(Pet petToBeDeleted);
 
 }
