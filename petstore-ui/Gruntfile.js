@@ -75,7 +75,9 @@ module.exports = function (grunt) {
         options: {
           open: true,
           middleware: function (connect) {
+            var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
             return [
+              proxy,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -111,7 +113,20 @@ module.exports = function (grunt) {
           open: true,
           base: '<%= yeoman.dist %>'
         }
-      }
+      },
+      proxies: [
+        {
+            context: '/pet',
+            host: 'localhost',
+            port: 8080,
+            https: false,
+            xforward: false
+            // Match redirect to JBoss Context Root
+            // rewrite: {
+            //     '^/restui': '/ifast-config-app/restui'
+            // }
+        }
+      ]
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -400,6 +415,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
