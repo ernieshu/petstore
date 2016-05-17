@@ -6,7 +6,7 @@ public interface PetStoreService {
 
 	public Pet get(Long petId);
 
-	public void add(Pet petToBeInserted);
+	public Pet add(Pet petToBeInserted);
 
 	public void delete(Long petId);
 
