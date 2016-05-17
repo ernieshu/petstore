@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.iwd.petstore_services.domain.Pet;
+import com.iwd.petstore_services.domain.PetPhotoURLs;
 
 /**
  * Unit test for simple App.
@@ -54,9 +54,6 @@ public class AppControllerTest {
 	@Test
 	public void createPet_validCase() {
 		Pet validPet = createValidPet();
-		Set<String> photoUrls = new HashSet<String>();
-		photoUrls.add("string");
-		validPet.setPhotoURLs(photoUrls);
 		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(validPet);
 		ResponseEntity<String> testOutput = fixture.create(validPet);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
@@ -67,8 +64,11 @@ public class AppControllerTest {
 		Pet validPet = new Pet();
 		validPet.setId((long) 1);
 		validPet.setName("petName");
-		HashSet<String> photoUrls = new HashSet<String>();
-		photoUrls.add("string");
+		HashSet<PetPhotoURLs> photoUrls = new HashSet<PetPhotoURLs>();
+		PetPhotoURLs petPhotoURL = new PetPhotoURLs();
+		petPhotoURL.setId(1);
+		petPhotoURL.setPhotoURL("string");
+		photoUrls.add(petPhotoURL);
 		validPet.setPhotoURLs(photoUrls);
 		return validPet;
 	}

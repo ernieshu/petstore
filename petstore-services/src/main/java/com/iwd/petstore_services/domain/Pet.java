@@ -23,28 +23,22 @@ public class Pet implements Serializable {
 
 	@Column
 	private String name;
-	
+
 	@Column
 	private PetStatus status;
 
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="CATEGORY_ID")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
-	
-	// TODO phtotoURLS
-	@OneToMany(orphanRemoval=true)
-	@JoinColumn(name="PET_ID")
-	private Set<String> photoURLs;
-	
-    @ManyToMany
-    @JoinTable(name="PET_TAGS",
-        joinColumns=
-            @JoinColumn(name="PET_ID", referencedColumnName="ID"),
-        inverseJoinColumns=
-            @JoinColumn(name="TAG_ID", referencedColumnName="TAG_ID")
-        )
+
+	@OneToMany(orphanRemoval = true)
+	@JoinColumn(name = "PET_ID")
+	private Set<PetPhotoURLs> photoURLs;
+
+	@ManyToMany
+	@JoinTable(name = "PET_TAGS", joinColumns = @JoinColumn(name = "PET_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
 	private Set<Tag> tags;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -60,7 +54,6 @@ public class Pet implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 
 	public PetStatus getStatus() {
 		return status;
@@ -78,11 +71,11 @@ public class Pet implements Serializable {
 		this.category = category;
 	}
 
-	public Set<String> getPhotoURLs() {
+	public Set<PetPhotoURLs> getPhotoURLs() {
 		return photoURLs;
 	}
 
-	public void setPhotoURLs(Set<String> photoURLs) {
+	public void setPhotoURLs(Set<PetPhotoURLs> photoURLs) {
 		this.photoURLs = photoURLs;
 	}
 
