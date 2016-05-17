@@ -42,7 +42,7 @@ public class AppController {
 	}
 
 	@Bean
-	public ServletRegistrationBean h2servletRegistration() {
+	public ServletRegistrationBean h2ServletRegistration() {
 		ServletRegistrationBean registration = new ServletRegistrationBean(new WebServlet());
 		registration.addUrlMappings("/console/*");
 		return registration;
