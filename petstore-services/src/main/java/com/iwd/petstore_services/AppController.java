@@ -28,7 +28,7 @@ public class AppController {
 	@ResponseBody
 	@Transactional(readOnly = true)
 	ResponseEntity<String> get(@PathVariable Long petId) {
-		if (petId == 0) {
+		if (petId < 0) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 		

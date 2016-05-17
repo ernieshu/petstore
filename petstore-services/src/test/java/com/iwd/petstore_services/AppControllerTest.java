@@ -1,38 +1,53 @@
 package com.iwd.petstore_services;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.staticmock.MockStaticEntityMethods;
+
+import com.iwd.petstore_services.domain.Pet;
 
 /**
  * Unit test for simple App.
  */
-public class AppControllerTest 
-    extends TestCase
+@RunWith(MockitoJUnitRunner.class)
+public class AppControllerTest
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppControllerTest( String testName )
-    {
-        super( testName );
+	@InjectMocks
+	AppController fixture = new AppController();
+	
+	@Mock
+	private PetStoreService petStoreService;
+		
+    @Test
+    public void getPet_InvalidInput() {
+    	Long invalidInput = (long) -5;
+    	ResponseEntity<String> testOutput = fixture.get(invalidInput);
+    	assertEquals(testOutput.getStatusCode(),HttpStatus.BAD_REQUEST);
     }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppControllerTest.class );
+    
+    @Test
+    public void getPet_NotFound() {
+    	Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(null);
+    	ResponseEntity<String> testOutput = fixture.get((long) 5);
+    	assertEquals(testOutput.getStatusCode(),HttpStatus.NOT_FOUND);
     }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    
+    @Test
+    public void getPet_validCase() {
+    	Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(new Pet());
+    	ResponseEntity<String> testOutput = fixture.get((long) 5);
+    	assertEquals(testOutput.getStatusCode(),HttpStatus.ACCEPTED);
+    	assertNotNull(testOutput.getBody());
+        	
     }
+    
 }
