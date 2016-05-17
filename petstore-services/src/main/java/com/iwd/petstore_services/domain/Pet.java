@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -31,9 +32,9 @@ public class Pet implements Serializable {
 	private Category category;
 	
 	// TODO phtotoURLS
-//	@OneToMany(orphanRemoval=true)
-//	@JoinColumn(name="PET_ID")
-//	public Set<String> getPhotoURLs {return photoURLs;}
+	@OneToMany(orphanRemoval=true)
+	@JoinColumn(name="PET_ID")
+	private Set<String> photoURLs;
 	
     @ManyToMany
     @JoinTable(name="PET_TAGS",
@@ -58,5 +59,38 @@ public class Pet implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public PetStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(PetStatus status) {
+		this.status = status;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Set<String> getPhotoURLs() {
+		return photoURLs;
+	}
+
+	public void setPhotoURLs(Set<String> photoURLs) {
+		this.photoURLs = photoURLs;
+	}
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
 	}
 }
