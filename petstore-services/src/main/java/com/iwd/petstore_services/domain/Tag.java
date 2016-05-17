@@ -6,7 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Immutable;
+
 @Entity
+@Immutable
 public class Tag implements Serializable {
 
 	@Id

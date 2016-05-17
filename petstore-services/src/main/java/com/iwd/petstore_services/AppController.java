@@ -74,7 +74,8 @@ public class AppController {
 		tag.setId(1);
 		tag.setName("TAG 1");
 		Set<Tag> tagSet = new HashSet<Tag>();
-		// pet.setTags(tagSet);
+		tagSet.add(tag);
+		pet.setTags(tagSet);
 		pet.setStatus(PetStatus.AVAILABLE);
 
 		if (!validatePet(pet)) {

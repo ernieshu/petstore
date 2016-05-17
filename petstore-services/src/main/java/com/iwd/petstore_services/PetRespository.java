@@ -4,9 +4,9 @@ import org.springframework.data.repository.Repository;
 
 import com.iwd.petstore_services.domain.Pet;
 
-public interface PetRespository extends Repository<Pet, Long> {
+public interface PetRespository extends Repository<Pet, Integer> {
 
-	Pet findOne(Long primaryKey);
+	Pet findOne(Integer primaryKey);
 
 	Pet save(Pet petTobeSaved);
 
