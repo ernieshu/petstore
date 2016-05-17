@@ -21,13 +21,15 @@ public class PetStoreServiceImpl implements PetStoreService {
 		return petRepository.findOne(petId);
 	}
 
-	public void add(Pet petToBeInserted) {
+	public Pet add(Pet petToBeInserted) {
+		
 		Pet pet = petRepository.save(petToBeInserted);
 
 		if (pet != null) {
-			// TODO do something!
+			return pet;
 		} else {
 			// TODO this is an error - do something else!
+			return null;
 		}
 	}
 
@@ -42,4 +44,6 @@ public class PetStoreServiceImpl implements PetStoreService {
 			// TODO - put an error log here!
 		}
 	}
+	
+
 }

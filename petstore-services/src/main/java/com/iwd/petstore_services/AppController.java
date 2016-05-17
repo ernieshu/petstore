@@ -49,7 +49,7 @@ public class AppController {
 		}
 		else {
 			petStoreService.add(pet);
-			return new ResponseEntity<String>(pet.toString(), HttpStatus.OK); //FIXME this should be sending JSON rather than toString representation
+			return new ResponseEntity<String>(pet.toString(), HttpStatus.ACCEPTED); //FIXME this should be sending JSON rather than toString representation
 		}
 		
 		
