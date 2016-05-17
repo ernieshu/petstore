@@ -2,9 +2,9 @@ package com.iwd.petstore_services.domain;
 
 public enum PetStatus {
 
-	AVAILABLE("Available"), 
-	PENDING("Pending"), 
-	SOLD("Sold");
+	AVAILABLE("available"), 
+	PENDING("pending"), 
+	SOLD("sold");
 
 	private final String statusName;
 	
