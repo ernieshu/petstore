@@ -1,5 +1,8 @@
 package com.iwd.petstore_services;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.iwd.petstore_services.domain.Category;
 import com.iwd.petstore_services.domain.Pet;
+import com.iwd.petstore_services.domain.PetPhotoURLs;
+import com.iwd.petstore_services.domain.PetStatus;
+import com.iwd.petstore_services.domain.Tag;
 
 @Controller
 @SpringBootApplication
@@ -27,7 +34,7 @@ public class AppController {
 	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.GET })
 	@ResponseBody
 	@Transactional(readOnly = true)
-	ResponseEntity<String> get(@PathVariable Long petId) {
+	ResponseEntity<String> get(@PathVariable Integer petId) {
 		if (petId < 0) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
@@ -48,6 +55,27 @@ public class AppController {
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
 	@ResponseBody
 	ResponseEntity<String> create(Pet pet) {
+
+		// FIXME - below code is only for testing purposes
+
+		pet.setId(1);
+		Category category = new Category();
+		category.setId(1);
+		category.setName("Category 1");
+		pet.setCategory(category);
+		pet.setName("doggie");
+		PetPhotoURLs petPhotoUrl = new PetPhotoURLs();
+		petPhotoUrl.setPetId(pet.getId());
+		petPhotoUrl.setPhotoURL("string");
+		Set<PetPhotoURLs> photoSet = new HashSet<PetPhotoURLs>();
+		photoSet.add(petPhotoUrl);
+		// pet.setPhotoURLs(photoSet);
+		Tag tag = new Tag();
+		tag.setId(1);
+		tag.setName("TAG 1");
+		Set<Tag> tagSet = new HashSet<Tag>();
+		// pet.setTags(tagSet);
+		pet.setStatus(PetStatus.AVAILABLE);
 
 		if (!validatePet(pet)) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -83,7 +111,7 @@ public class AppController {
 
 	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.DELETE })
 	@ResponseBody
-	ResponseEntity<String> delete(@PathVariable Long petId) {
+	ResponseEntity<String> delete(@PathVariable Integer petId) {
 		if (petId < 0) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
@@ -112,9 +140,9 @@ public class AppController {
 		if (pet.getName() == null || pet.getName().length() == 0) {
 			return false;
 		}
-		if (pet.getPhotoURLs().size() == 0) {
-			return false;
-		}
+		// if (pet.getPhotoURLs().size() == 0) {
+		// return false;
+		// }
 		return true;
 	}
 }

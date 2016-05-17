@@ -18,8 +18,8 @@ public class PetStoreServiceImpl implements PetStoreService {
 	}
 
 	@Override
-	public Pet get(Long petId) {
-		return petRepository.findOne(petId);
+	public Pet get(Integer petId) {
+		return petRepository.findOne((long) petId);
 	}
 
 	@Override

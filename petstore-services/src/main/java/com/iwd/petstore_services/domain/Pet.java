@@ -1,25 +1,20 @@
 package com.iwd.petstore_services.domain;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Pet implements Serializable {
 
 	@Id
-	@GeneratedValue
-	private Long id;
+	// @GeneratedValue
+	private Integer id;
 
 	@Column
 	private String name;
@@ -31,19 +26,21 @@ public class Pet implements Serializable {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
-	@OneToMany(orphanRemoval = true)
-	@JoinColumn(name = "PET_ID")
-	private Set<PetPhotoURLs> photoURLs;
+	// @OneToMany(orphanRemoval = true)
+	// @JoinColumn(name = "PET_ID")
+	// private Set<PetPhotoURLs> photoURLs;
+	//
+	// @ManyToMany
+	// @JoinTable(name = "PET_TAGS", joinColumns = @JoinColumn(name = "PET_ID",
+	// referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name =
+	// "TAG_ID", referencedColumnName = "TAG_ID"))
+	// private Set<Tag> tags;
 
-	@ManyToMany
-	@JoinTable(name = "PET_TAGS", joinColumns = @JoinColumn(name = "PET_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
-	private Set<Tag> tags;
-
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -71,19 +68,19 @@ public class Pet implements Serializable {
 		this.category = category;
 	}
 
-	public Set<PetPhotoURLs> getPhotoURLs() {
-		return photoURLs;
-	}
-
-	public void setPhotoURLs(Set<PetPhotoURLs> photoURLs) {
-		this.photoURLs = photoURLs;
-	}
-
-	public Set<Tag> getTags() {
-		return tags;
-	}
-
-	public void setTags(Set<Tag> tags) {
-		this.tags = tags;
-	}
+	// public Set<PetPhotoURLs> getPhotoURLs() {
+	// return photoURLs;
+	// }
+	//
+	// public void setPhotoURLs(Set<PetPhotoURLs> photoURLs) {
+	// this.photoURLs = photoURLs;
+	// }
+	//
+	// public Set<Tag> getTags() {
+	// return tags;
+	// }
+	//
+	// public void setTags(Set<Tag> tags) {
+	// this.tags = tags;
+	// }
 }

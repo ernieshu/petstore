@@ -30,22 +30,22 @@ public class AppControllerTest {
 
 	@Test
 	public void getPet_InvalidInput() {
-		Long invalidInput = (long) -5;
+		Integer invalidInput = -5;
 		ResponseEntity<String> testOutput = fixture.get(invalidInput);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 
 	@Test
 	public void getPet_NotFound() {
-		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(null);
-		ResponseEntity<String> testOutput = fixture.get((long) 5);
+		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(null);
+		ResponseEntity<String> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 
 	@Test
 	public void getPet_validCase() {
-		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(new Pet());
-		ResponseEntity<String> testOutput = fixture.get((long) 5);
+		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(new Pet());
+		ResponseEntity<String> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
 		assertNotNull(testOutput.getBody());
 
@@ -62,14 +62,14 @@ public class AppControllerTest {
 
 	private Pet createValidPet() {
 		Pet validPet = new Pet();
-		validPet.setId((long) 1);
+		validPet.setId(1);
 		validPet.setName("petName");
 		HashSet<PetPhotoURLs> photoUrls = new HashSet<PetPhotoURLs>();
 		PetPhotoURLs petPhotoURL = new PetPhotoURLs();
-		petPhotoURL.setId(1);
+		petPhotoURL.setPetId(1);
 		petPhotoURL.setPhotoURL("string");
 		photoUrls.add(petPhotoURL);
-		validPet.setPhotoURLs(photoUrls);
+		// validPet.setPhotoURLs(photoUrls);
 		return validPet;
 	}
 
@@ -92,7 +92,7 @@ public class AppControllerTest {
 	@Test
 	public void deletePet_validCase() {
 		Pet validPet = createValidPet();
-		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(validPet);
+		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(validPet);
 		Mockito.doNothing().when(petStoreService).delete(Mockito.any(Pet.class));
 		ResponseEntity<String> testOutput = fixture.delete(validPet.getId());
 		assertEquals(testOutput.getStatusCode(), HttpStatus.ACCEPTED);
@@ -100,14 +100,14 @@ public class AppControllerTest {
 
 	@Test
 	public void deletePet_invalidCase_notFound() {
-		Mockito.when(petStoreService.get(Mockito.anyLong())).thenReturn(null);
-		ResponseEntity<String> testOutput = fixture.delete((long) 1);
+		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(null);
+		ResponseEntity<String> testOutput = fixture.delete(1);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 
 	@Test
 	public void deletePet_invalidCase_invalidInput() {
-		ResponseEntity<String> testOutput = fixture.delete((long) -1);
+		ResponseEntity<String> testOutput = fixture.delete(-1);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 }
