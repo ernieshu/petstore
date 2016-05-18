@@ -8,11 +8,10 @@ public class PetTo {
 
 	private Integer id;
 	private String name;
-	private String statusName;
 	private CategoryTo category;
 	private List<String> photoUrls;
 	private List<TagTo> tags;
-	private PetStatus petStatus;
+	private PetStatus status;
 
 	public Integer getId() {
 		return id;
@@ -28,14 +27,6 @@ public class PetTo {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getStatusName() {
-		return statusName;
-	}
-
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
 	}
 
 	public CategoryTo getCategory() {
@@ -62,12 +53,12 @@ public class PetTo {
 		this.tags = tags;
 	}
 
-	public PetStatus getPetStatus() {
-		return petStatus;
+	public PetStatus getStatus() {
+		return status;
 	}
 
-	public void setPetStatus(PetStatus petStatus) {
-		this.petStatus = petStatus;
+	public void setStatus(PetStatus status) {
+		this.status = status;
 	}
 
 }

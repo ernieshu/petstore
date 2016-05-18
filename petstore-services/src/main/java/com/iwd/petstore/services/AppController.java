@@ -115,17 +115,16 @@ public class AppController {
 		returnPet.setId(petTo.getId());
 		returnPet.setName(petTo.getName());
 		if (petTo.getPhotoUrls() != null && petTo.getPhotoUrls().size() > 0) {
-			Set<PetPhotoURL> petPhotoUrls = new HashSet<PetPhotoURL>();
+			List<PetPhotoURL> petPhotoUrls = new ArrayList<PetPhotoURL>();
 			for (String photoUrlString : petTo.getPhotoUrls()) {
 				PetPhotoURL ppu = new PetPhotoURL();
-				ppu.setPetId(petTo.getId());
 				ppu.setPhotoURL(photoUrlString);
 				petPhotoUrls.add(ppu);
 			}
 			returnPet.setPhotoURLs(petPhotoUrls);
 		}
-		if (petTo.getPetStatus() != null) {
-			returnPet.setStatus(petTo.getPetStatus());
+		if (petTo.getStatus() != null) {
+			returnPet.setStatus(petTo.getStatus());
 		}
 		if (petTo.getTags() != null && petTo.getTags().size() > 0) {
 
@@ -185,7 +184,7 @@ public class AppController {
 			returnPet.setPhotoUrls(photoUrls);
 		}
 		if (pet.getStatus() != null) {
-			returnPet.setPetStatus(pet.getStatus());
+			returnPet.setStatus(pet.getStatus());
 		}
 		if (pet.getTags() != null && !pet.getTags().isEmpty()) {
 			List<TagTo> tags = new ArrayList<TagTo>();

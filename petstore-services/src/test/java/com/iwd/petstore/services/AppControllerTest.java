@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Test;
@@ -68,9 +67,8 @@ public class AppControllerTest {
 		Pet validPet = new Pet();
 		validPet.setId(1);
 		validPet.setName("petName");
-		HashSet<PetPhotoURL> photoUrls = new HashSet<PetPhotoURL>();
+		List<PetPhotoURL> photoUrls = new ArrayList<PetPhotoURL>();
 		PetPhotoURL petPhotoURL = new PetPhotoURL();
-		petPhotoURL.setPetId(1);
 		petPhotoURL.setPhotoURL("string");
 		photoUrls.add(petPhotoURL);
 		validPet.setPhotoURLs(photoUrls);

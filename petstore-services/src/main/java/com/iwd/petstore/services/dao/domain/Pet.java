@@ -1,9 +1,9 @@
 package com.iwd.petstore.services.dao.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Pet implements Serializable {
@@ -32,8 +32,8 @@ public class Pet implements Serializable {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<PetPhotoURL> photoURLs;
+	@Transient
+	private List<PetPhotoURL> photoURLs;
 
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "PET_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
@@ -75,11 +75,11 @@ public class Pet implements Serializable {
 		this.category = category;
 	}
 
-	public Set<PetPhotoURL> getPhotoURLs() {
+	public List<PetPhotoURL> getPhotoURLs() {
 		return photoURLs;
 	}
 
-	public void setPhotoURLs(Set<PetPhotoURL> photoURLs) {
+	public void setPhotoURLs(List<PetPhotoURL> photoURLs) {
 		this.photoURLs = photoURLs;
 	}
 

@@ -16,7 +16,7 @@ public class PetPhotoURL implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
-	@Column(name = "PET_ID", nullable = false)
+	@Column(name = "PET_ID")
 	private Integer petId;
 
 	@Column(name = "PHOTOURL", nullable = false)
