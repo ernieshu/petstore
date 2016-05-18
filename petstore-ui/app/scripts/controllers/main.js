@@ -10,6 +10,13 @@
 angular.module('petstoreUiApp')
   .controller('MainCtrl', function ($scope, $http) {
 
+    $scope.categories = [
+      { id: 0, name: 'Category 0'},
+      { id: 1, name: 'Category 1'},
+      { id: 2, name: 'Category 2'},
+      { id: 3, name: 'Category 3'}
+    ]
+
     $scope.types = [
       { id: 0, name: 'Type 0'},
       { id: 1, name: 'Type 1'},
