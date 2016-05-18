@@ -3,7 +3,9 @@ package com.iwd.petstore.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +16,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.iwd.petstore.services.AppController;
-import com.iwd.petstore.services.PetStoreService;
-import com.iwd.petstore.services.domain.Pet;
-import com.iwd.petstore.services.domain.PetPhotoURL;
-import com.iwd.petstore.services.domain.PetURLCompositeKey;
+import com.iwd.petstore.services.dao.domain.Pet;
+import com.iwd.petstore.services.dao.domain.PetPhotoURL;
+import com.iwd.petstore.services.domain.PetTo;
 
 /**
  * Unit test for simple App.
@@ -56,9 +56,10 @@ public class AppControllerTest {
 
 	@Test
 	public void createPet_validCase() {
+		PetTo validPetTo = createValidPetTo();
 		Pet validPet = createValidPet();
 		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(validPet);
-		ResponseEntity<Pet> testOutput = fixture.create(validPet);
+		ResponseEntity<PetTo> testOutput = fixture.create(validPetTo);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
 	}
@@ -69,29 +70,29 @@ public class AppControllerTest {
 		validPet.setName("petName");
 		HashSet<PetPhotoURL> photoUrls = new HashSet<PetPhotoURL>();
 		PetPhotoURL petPhotoURL = new PetPhotoURL();
-		PetURLCompositeKey petURLCompositeKey = new PetURLCompositeKey();
-		petURLCompositeKey.setPetId(1);
-		petURLCompositeKey.setPhotoURL("string");
-		petPhotoURL.setPetURLCompositeKey(petURLCompositeKey);
+		petPhotoURL.setPetId(1);
+		petPhotoURL.setPhotoURL("string");
 		photoUrls.add(petPhotoURL);
-		// validPet.setPhotoURLs(photoUrls);
+		validPet.setPhotoURLs(photoUrls);
+		return validPet;
+	}
+
+	private PetTo createValidPetTo() {
+		PetTo validPet = new PetTo();
+		validPet.setId(1);
+		validPet.setName("petName");
+		List<String> photoUrls = new ArrayList<String>();
+		photoUrls.add("String");
+		validPet.setPhotoUrls(photoUrls);
 		return validPet;
 	}
 
 	@Test
 	public void createPet_invalidCase_noName() {
-		Pet invalidPet = createValidPet();
+		PetTo invalidPet = createValidPetTo();
 		invalidPet.setName(null);
-		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(invalidPet);
-		ResponseEntity<Pet> testOutput = fixture.create(invalidPet);
+		ResponseEntity<PetTo> testOutput = fixture.create(invalidPet);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
-	}
-
-	@Test
-	public void createPet_invalidCase_systemFailure() {
-		Mockito.when(petStoreService.add(Mockito.any(Pet.class))).thenReturn(null);
-		ResponseEntity<Pet> testOutput = fixture.create(createValidPet());
-		assertEquals(testOutput.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Test

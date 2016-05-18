@@ -1,4 +1,4 @@
-package com.iwd.petstore.services.domain;
+package com.iwd.petstore.services.dao.domain;
 
 public enum PetStatus {
 

@@ -1,4 +1,4 @@
-package com.iwd.petstore.services.domain;
+package com.iwd.petstore.services.dao.domain;
 
 import java.io.Serializable;
 
@@ -6,13 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class PetURLCompositeKey implements Serializable {
+public class PetTagCompositeKey implements Serializable {
 
 	@Column(name = "PET_ID", nullable = false)
 	private Integer petId;
 
-	@Column(name = "PHOTOURL", nullable = false)
-	private String photoURL;
+	@Column(name = "TAG_ID", nullable = false)
+	private Integer tagId;
 
 	public Integer getPetId() {
 		return petId;
@@ -22,11 +22,12 @@ public class PetURLCompositeKey implements Serializable {
 		this.petId = petId;
 	}
 
-	public String getPhotoURL() {
-		return photoURL;
+	public Integer getTagId() {
+		return tagId;
 	}
 
-	public void setPhotoURL(String photoURL) {
-		this.photoURL = photoURL;
+	public void setTagId(Integer tagId) {
+		this.tagId = tagId;
 	}
+
 }

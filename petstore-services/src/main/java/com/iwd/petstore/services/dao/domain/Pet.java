@@ -1,8 +1,9 @@
-package com.iwd.petstore.services.domain;
+package com.iwd.petstore.services.dao.domain;
 
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -30,9 +32,8 @@ public class Pet implements Serializable {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
-	// @OneToMany(cascade = CascadeType.ALL, mappedBy =
-	// "petURLCompositeKey.petId")
-	// private Set<PetPhotoURL> photoURLs;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<PetPhotoURL> photoURLs;
 
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "PET_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "TAG_ID"))
@@ -55,7 +56,11 @@ public class Pet implements Serializable {
 	}
 
 	public PetStatus getStatus() {
-		return PetStatus.getEnum(statusName);
+		if (statusName != null) {
+			return PetStatus.getEnum(statusName);
+		} else {
+			return null;
+		}
 	}
 
 	public void setStatus(PetStatus status) {
@@ -70,13 +75,13 @@ public class Pet implements Serializable {
 		this.category = category;
 	}
 
-	// public Set<PetPhotoURL> getPhotoURLs() {
-	// return photoURLs;
-	// }
-	//
-	// public void setPhotoURLs(Set<PetPhotoURL> photoURLs) {
-	// this.photoURLs = photoURLs;
-	// }
+	public Set<PetPhotoURL> getPhotoURLs() {
+		return photoURLs;
+	}
+
+	public void setPhotoURLs(Set<PetPhotoURL> photoURLs) {
+		this.photoURLs = photoURLs;
+	}
 
 	public Set<Tag> getTags() {
 		return tags;

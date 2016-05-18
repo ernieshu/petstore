@@ -1,6 +1,6 @@
 package com.iwd.petstore.services;
 
-import com.iwd.petstore.services.domain.Pet;
+import com.iwd.petstore.services.dao.domain.Pet;
 
 public interface PetStoreService {
 

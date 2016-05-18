@@ -1,5 +1,10 @@
 package com.iwd.petstore.services;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.iwd.petstore.services.domain.Pet;
+import com.iwd.petstore.services.dao.domain.Category;
+import com.iwd.petstore.services.dao.domain.Pet;
+import com.iwd.petstore.services.dao.domain.PetPhotoURL;
+import com.iwd.petstore.services.dao.domain.Tag;
+import com.iwd.petstore.services.domain.CategoryTo;
+import com.iwd.petstore.services.domain.PetTo;
+import com.iwd.petstore.services.domain.TagTo;
 
 @Controller
 @SpringBootApplication
@@ -42,40 +53,19 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
-	ResponseEntity<Pet> create(@RequestBody Pet pet) {
+	ResponseEntity<PetTo> create(@RequestBody PetTo petTo) {
 
-		// FIXME - below code is only for testing purposes
-		// pet.setId(1);
-		// Category category = new Category();
-		// category.setId(1);
-		// category.setName("Category 1");
-		// pet.setCategory(category);
-		// pet.setName("doggie");
-		// PetPhotoURL petPhotoUrl = new PetPhotoURL();
-		// PetURLCompositeKey petURLCompositeKey = new PetURLCompositeKey();
-		// petURLCompositeKey.setPetId(pet.getId());
-		// petURLCompositeKey.setPhotoURL("string");
-		// Set<PetPhotoURL> photoSet = new HashSet<PetPhotoURL>();
-		// photoSet.add(petPhotoUrl);
-		// // pet.setPhotoURLs(photoSet);
-		// Tag tag = new Tag();
-		// tag.setId(1);
-		// tag.setName("TAG 1");
-		// Set<Tag> tagSet = new HashSet<Tag>();
-		// tagSet.add(tag);
-		// pet.setTags(tagSet);
-		// pet.setStatus(PetStatus.AVAILABLE);
-
-		if (!validatePet(pet)) {
-			return new ResponseEntity<Pet>(HttpStatus.BAD_REQUEST);
+		if (!validatePet(petTo)) {
+			return new ResponseEntity<PetTo>(HttpStatus.BAD_REQUEST);
 		} else {
 
-			Pet returnedPet = petStoreService.add(pet);
-			if (returnedPet == null) {
-				return new ResponseEntity<Pet>(HttpStatus.INTERNAL_SERVER_ERROR);
-			} else {
-				return new ResponseEntity<Pet>(returnedPet, HttpStatus.OK);
-			}
+			Pet petToCommit = convert(petTo);
+
+			petToCommit = petStoreService.add(petToCommit);
+
+			PetTo petToReturn = convert(petToCommit);
+
+			return new ResponseEntity<PetTo>(petToReturn, HttpStatus.OK);
 		}
 
 	}
@@ -107,14 +97,104 @@ public class AppController {
 		SpringApplication.run(AppController.class, args);
 	}
 
-	private boolean validatePet(Pet pet) {
+	private boolean validatePet(PetTo pet) {
 		if (pet.getName() == null || pet.getName().length() == 0) {
 			return false;
 		}
-		// if (pet.getPhotoURLs().size() == 0) {
-		// return false;
-		// }
+		if (pet.getPhotoUrls() == null || pet.getPhotoUrls().size() == 0) {
+			return false;
+		}
 		return true;
 	}
 
+	protected Pet convert(PetTo petTo) {
+		Pet returnPet = new Pet();
+		if (petTo.getCategory() != null) {
+			returnPet.setCategory(convert(petTo.getCategory()));
+		}
+		returnPet.setId(petTo.getId());
+		returnPet.setName(petTo.getName());
+		if (petTo.getPhotoUrls() != null && petTo.getPhotoUrls().size() > 0) {
+			Set<PetPhotoURL> petPhotoUrls = new HashSet<PetPhotoURL>();
+			for (String photoUrlString : petTo.getPhotoUrls()) {
+				PetPhotoURL ppu = new PetPhotoURL();
+				ppu.setPetId(petTo.getId());
+				ppu.setPhotoURL(photoUrlString);
+				petPhotoUrls.add(ppu);
+			}
+			returnPet.setPhotoURLs(petPhotoUrls);
+		}
+		if (petTo.getPetStatus() != null) {
+			returnPet.setStatus(petTo.getPetStatus());
+		}
+		if (petTo.getTags() != null && petTo.getTags().size() > 0) {
+
+			Set<Tag> tags = new HashSet<Tag>();
+			for (TagTo tagTo : petTo.getTags()) {
+				tags.add(convert(tagTo));
+			}
+			returnPet.setTags(tags);
+		}
+
+		return returnPet;
+	}
+
+	protected Category convert(CategoryTo category) {
+		Category returnCategory = new Category();
+		returnCategory.setId(category.getId());
+		returnCategory.setName(category.getName());
+		return returnCategory;
+	}
+
+	protected CategoryTo convert(Category category) {
+		CategoryTo returnCategory = new CategoryTo();
+		returnCategory.setId(category.getId());
+		returnCategory.setName(category.getName());
+		return returnCategory;
+	}
+
+	protected Tag convert(TagTo tagTo) {
+		Tag returnTag = new Tag();
+		returnTag.setId(tagTo.getId());
+		returnTag.setName(tagTo.getName());
+		return returnTag;
+	}
+
+	protected TagTo convert(Tag tag) {
+		TagTo returnTag = new TagTo();
+		returnTag.setId(tag.getId());
+		returnTag.setName(tag.getName());
+		return returnTag;
+	}
+
+	protected PetTo convert(Pet pet) {
+		PetTo returnPet = new PetTo();
+		if (pet.getCategory() != null) {
+			returnPet.setCategory(convert(pet.getCategory()));
+		}
+		returnPet.setId(pet.getId());
+		returnPet.setName(pet.getName());
+
+		if (pet.getPhotoURLs() != null && !pet.getPhotoURLs().isEmpty()) {
+			List<String> photoUrls = new ArrayList<String>();
+			for (PetPhotoURL ppu : pet.getPhotoURLs()) {
+				String photoUrl = ppu.getPhotoURL();
+				photoUrls.add(photoUrl);
+			}
+
+			returnPet.setPhotoUrls(photoUrls);
+		}
+		if (pet.getStatus() != null) {
+			returnPet.setPetStatus(pet.getStatus());
+		}
+		if (pet.getTags() != null && !pet.getTags().isEmpty()) {
+			List<TagTo> tags = new ArrayList<TagTo>();
+			for (Tag tag : pet.getTags()) {
+				tags.add(convert(tag));
+			}
+			returnPet.setTags(tags);
+		}
+
+		return returnPet;
+	}
 }

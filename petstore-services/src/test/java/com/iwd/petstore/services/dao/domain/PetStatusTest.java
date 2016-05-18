@@ -1,11 +1,11 @@
-package com.iwd.petstore.services.domain;
+package com.iwd.petstore.services.dao.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.iwd.petstore.services.domain.PetStatus;
+import com.iwd.petstore.services.dao.domain.PetStatus;
 
 public class PetStatusTest {
 

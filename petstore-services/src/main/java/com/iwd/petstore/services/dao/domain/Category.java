@@ -1,4 +1,4 @@
-package com.iwd.petstore.services.domain;
+package com.iwd.petstore.services.dao.domain;
 
 import java.io.Serializable;
 
@@ -10,13 +10,13 @@ import org.hibernate.annotations.Immutable;
 
 @Entity
 @Immutable
-public class Tag implements Serializable {
+public class Category implements Serializable {
 
 	@Id
-	@Column(name = "TAG_ID")
+	@Column(name = "CATEGORY_ID")
 	private Integer id;
 
-	@Column(name = "TAG_NAME")
+	@Column(name = "CATEGORY_NAME")
 	private String name;
 
 	public Integer getId() {

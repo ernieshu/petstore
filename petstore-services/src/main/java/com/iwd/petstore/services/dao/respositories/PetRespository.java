@@ -1,8 +1,8 @@
-package com.iwd.petstore.services.repositories;
+package com.iwd.petstore.services.dao.respositories;
 
 import org.springframework.data.repository.Repository;
 
-import com.iwd.petstore.services.domain.Pet;
+import com.iwd.petstore.services.dao.domain.Pet;
 
 public interface PetRespository extends Repository<Pet, Integer> {
 
