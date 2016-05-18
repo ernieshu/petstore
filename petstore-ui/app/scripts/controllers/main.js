@@ -25,7 +25,16 @@ angular.module('petstoreUiApp')
         category : {
           id: $scope.categoryId
         },
-        status : $scope.status.toUpperCase()
+        status : $scope.status.toUpperCase(),
+        photoUrls: [
+          "photoUrlString"
+        ],
+        tags: [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ],
 
         // TODO - input for TAGS
         // TODO - input for PhotoURLs
