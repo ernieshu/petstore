@@ -33,21 +33,21 @@ public class AppControllerTest {
 	@Test
 	public void getPet_InvalidInput() {
 		Integer invalidInput = -5;
-		ResponseEntity<Pet> testOutput = fixture.get(invalidInput);
+		ResponseEntity<PetTo> testOutput = fixture.get(invalidInput);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 
 	@Test
 	public void getPet_NotFound() {
 		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(null);
-		ResponseEntity<Pet> testOutput = fixture.get(5);
+		ResponseEntity<PetTo> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 
 	@Test
 	public void getPet_validCase() {
 		Mockito.when(petStoreService.get(Mockito.anyInt())).thenReturn(new Pet());
-		ResponseEntity<Pet> testOutput = fixture.get(5);
+		ResponseEntity<PetTo> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
 

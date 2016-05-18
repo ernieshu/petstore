@@ -39,17 +39,18 @@ public class AppController {
 	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.GET })
 	@ResponseBody
 	@Transactional(readOnly = true)
-	ResponseEntity<Pet> get(@PathVariable Integer petId) {
+	ResponseEntity<PetTo> get(@PathVariable Integer petId) {
 		if (petId < 0) {
-			return new ResponseEntity<Pet>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<PetTo>(HttpStatus.BAD_REQUEST);
 		}
 
-		Pet returnPet = petStoreService.get(petId);
-		if (returnPet == null) {
-			return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
+		Pet pet = petStoreService.get(petId);
+
+		if (pet == null) {
+			return new ResponseEntity<PetTo>(HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<Pet>(returnPet, HttpStatus.OK);
+		return new ResponseEntity<PetTo>(convert(pet), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
