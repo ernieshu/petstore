@@ -1,4 +1,4 @@
-package com.iwd.petstore_services.domain;
+package com.iwd.petstore.services.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
