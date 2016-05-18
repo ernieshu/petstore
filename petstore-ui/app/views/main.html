@@ -17,7 +17,7 @@
       <br>
       <label>Pet Types:</label>
       <label ng-repeat="type in types">
-        <input type="checkbox" checklist-model="pet.types" checklist-value="type"> {{type}}
+        <input type="checkbox" checklist-model="pet.types" checklist-value="type"> {{type.name}}
       </label>
       <br>
       <label>Status:</label>
@@ -26,6 +26,8 @@
         <option>Pending</option>
         <option>Sold</option>
       </select>
+      <label>Names:</label>
+      <tags-input ng-model="pet-tags" display-property="names"></tags-input>
       <br>
       <input type="submit" id="submit" value="Submit"/>
       <!--pre>list={{list}}</pre-->

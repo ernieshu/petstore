@@ -11,11 +11,15 @@ angular.module('petstoreUiApp')
   .controller('MainCtrl', function ($scope, $http) {
 
     $scope.types = [
-      'Type 0', 
-      'Type 1',
-      'Type 2', 
-      'Type 3'
+      { id: 0, name: 'Type 0'},
+      { id: 1, name: 'Type 1'},
+      { id: 2, name: 'Type 2'},
+      { id: 3, name: 'Type 3'}
     ];
+
+    $scope.pet = {
+      types: []
+    };
 
     $scope.addAPet = function() {
     	console.log("adding a pet with name:" + $scope.name);
@@ -29,14 +33,7 @@ angular.module('petstoreUiApp')
         photoUrls: [
           "photoUrlString"
         ],
-        tags: [
-          {
-            "id": 0,
-            "name": "string"
-          }
-        ],
-
-        // TODO - input for TAGS
+        tags: $scope.pet.types
         // TODO - input for PhotoURLs
     	};
     	$http.post('pet', petToBeAdded).success(function(data) {
