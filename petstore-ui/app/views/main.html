@@ -1,36 +1,32 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
-
 <div>
   <h2>Add a New Pet to the Store</h2>
-  <p>
-    ** TODO ** On create, perhaps return the id as feedback to the user?
-  </p>
+  <br>
   <form ng-submit="addAPet()" ng-controller="MainCtrl">
-    Enter the pet info, and press 'Submit'.
+      Enter the pet info, and press 'Submit'.
+      <br>
       <label>Pet Name:</label>
       <input type="text" ng-model="name" name="name"/>
+      <br>
+      <label>Category Id:</label>
+      <select ng-model="categoryId" name="categoryId">
+        <option value="0">Category 1</option>
+        <option value="1">Category 2</option>
+        <option value="2">Category 3</option>
+        <option value="3">Category 4</option>
+      </select>
+      <br>
+      <label>Pet Types:</label>
+      <label ng-repeat="type in types">
+        <input type="checkbox" checklist-model="pet.types" checklist-value="type"> {{type}}
+      </label>
+      <br>
+      <label>Status:</label>
+      <select ng-model="status" name="status">
+        <option>Available</option>
+        <option>Pending</option>
+        <option>Sold</option>
+      </select>
+      <br>
       <input type="submit" id="submit" value="Submit"/>
       <!--pre>list={{list}}</pre-->
   </form>
