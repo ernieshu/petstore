@@ -1,20 +1,18 @@
-README.md
+# Petstore # 
 
-h1. Petstore 
+## How to build ##
 
-h2. How to build
+### petstore-services ###
+* mvn clean package
+### petstore-ui ###
+* grunt build
 
-* in petstore-services
-** mvn clean package
-* in petstore-ui
-** grunt build
+## How to run ##
 
-h2. How to run
-
-h3. Running the backend API
-** java -jar target/petstore-services.jar
+### Running the backend API ###
+* java -jar target/petstore-services.jar
 OR 
-** run com.iwd.petstore_serivces.AppController as a Java Application in Eclipse
+* run com.iwd.petstore_serivces.AppController as a Java Application in Eclipse
 
-h3. Running the frontend
-** grunt serve
+### Running the frontend ###
+* grunt serve
