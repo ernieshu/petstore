@@ -1,8 +1,5 @@
 package com.iwd.petstore.services;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -14,16 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.iwd.petstore.services.domain.Category;
 import com.iwd.petstore.services.domain.Pet;
-import com.iwd.petstore.services.domain.PetPhotoURL;
-import com.iwd.petstore.services.domain.PetStatus;
-import com.iwd.petstore.services.domain.PetURLCompositeKey;
-import com.iwd.petstore.services.domain.Tag;
 
 @Controller
 @SpringBootApplication
@@ -49,32 +42,29 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/pet", method = { RequestMethod.POST })
-	@ResponseBody
-	ResponseEntity<Pet> create(Pet pet) {
+	ResponseEntity<Pet> create(@RequestBody Pet pet) {
 
 		// FIXME - below code is only for testing purposes
-
-		pet.setId(1);
-		Category category = new Category();
-		category.setId(1);
-		category.setName("Category 1");
-		pet.setCategory(category);
-		pet.setName("doggie");
-		PetPhotoURL petPhotoUrl = new PetPhotoURL();
-		PetURLCompositeKey petURLCompositeKey = new PetURLCompositeKey();
-		petURLCompositeKey.setPetId(pet.getId());
-		petURLCompositeKey.setPhotoURL("string");
-
-		Set<PetPhotoURL> photoSet = new HashSet<PetPhotoURL>();
-		photoSet.add(petPhotoUrl);
-		// pet.setPhotoURLs(photoSet);
-		Tag tag = new Tag();
-		tag.setId(1);
-		tag.setName("TAG 1");
-		Set<Tag> tagSet = new HashSet<Tag>();
-		tagSet.add(tag);
-		pet.setTags(tagSet);
-		pet.setStatus(PetStatus.AVAILABLE);
+		// pet.setId(1);
+		// Category category = new Category();
+		// category.setId(1);
+		// category.setName("Category 1");
+		// pet.setCategory(category);
+		// pet.setName("doggie");
+		// PetPhotoURL petPhotoUrl = new PetPhotoURL();
+		// PetURLCompositeKey petURLCompositeKey = new PetURLCompositeKey();
+		// petURLCompositeKey.setPetId(pet.getId());
+		// petURLCompositeKey.setPhotoURL("string");
+		// Set<PetPhotoURL> photoSet = new HashSet<PetPhotoURL>();
+		// photoSet.add(petPhotoUrl);
+		// // pet.setPhotoURLs(photoSet);
+		// Tag tag = new Tag();
+		// tag.setId(1);
+		// tag.setName("TAG 1");
+		// Set<Tag> tagSet = new HashSet<Tag>();
+		// tagSet.add(tag);
+		// pet.setTags(tagSet);
+		// pet.setStatus(PetStatus.AVAILABLE);
 
 		if (!validatePet(pet)) {
 			return new ResponseEntity<Pet>(HttpStatus.BAD_REQUEST);

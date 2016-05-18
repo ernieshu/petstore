@@ -25,7 +25,10 @@ angular.module('petstoreUiApp')
         category : {
           id: $scope.categoryId
         },
-        status : $scope.status
+        status : $scope.status.toUpperCase()
+
+        // TODO - input for TAGS
+        // TODO - input for PhotoURLs
     	};
     	$http.post('pet', petToBeAdded).success(function(data) {
 	  		// if we've gotten the pet, map it back to the GUI
