@@ -5,6 +5,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import com.iwd.petstore.services.domain.PetStatus;
+
 public class PetStatusTest {
 
 	@Test

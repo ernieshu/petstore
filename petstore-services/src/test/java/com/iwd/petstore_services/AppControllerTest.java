@@ -14,9 +14,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.iwd.petstore_services.domain.Pet;
-import com.iwd.petstore_services.domain.PetPhotoURL;
-import com.iwd.petstore_services.domain.PetURLCompositeKey;
+import com.iwd.petstore.services.AppController;
+import com.iwd.petstore.services.PetStoreService;
+import com.iwd.petstore.services.domain.Pet;
+import com.iwd.petstore.services.domain.PetPhotoURL;
+import com.iwd.petstore.services.domain.PetURLCompositeKey;
 
 /**
  * Unit test for simple App.
