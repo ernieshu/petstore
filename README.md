@@ -1,5 +1,3 @@
-README.md
-
 # Petstore # 
 
 ## How to build ##
