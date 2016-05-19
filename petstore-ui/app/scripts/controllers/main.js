@@ -15,32 +15,32 @@ angular.module('petstoreUiApp')
       { id: 1, name: 'Category 1'},
       { id: 2, name: 'Category 2'},
       { id: 3, name: 'Category 3'}
-    ]
+    ];
 
-    $scope.types = [
-      { id: 0, name: 'Type 0'},
-      { id: 1, name: 'Type 1'},
-      { id: 2, name: 'Type 2'},
-      { id: 3, name: 'Type 3'}
+    $scope.tags = [
+      { id: 0, name: 'Tag 0'},
+      { id: 1, name: 'Tag 1'},
+      { id: 2, name: 'Tag 2'},
+      { id: 3, name: 'Tag 3'}
     ];
 
     $scope.pet = {
-      types: []
+      tags: []
     };
 
     $scope.addAPet = function() {
-    	console.log("adding a pet with name:" + $scope.name);
+    	console.log('adding a pet with name:' + $scope.name);
 
     	var petToBeAdded = {
     		name : $scope.name,
         category : {
-          id: $scope.categoryId
+          id: $scope.pet.categoryId
         },
         status : $scope.status.toUpperCase(),
         photoUrls: [
-          "photoUrlString"
+          'photoUrlString'
         ],
-        tags: $scope.pet.types
+        tags: $scope.pet.tags
         // TODO - input for PhotoURLs
     	};
     	$http.post('pet', petToBeAdded).success(function(data) {

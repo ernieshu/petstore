@@ -8,13 +8,13 @@
       <input type="text" ng-model="name" name="name" required/>
       <br>
       <label>Category Id:</label>
-      <select ng-model="pet.category" name="categoryId">
+      <select ng-model="pet.categoryId" name="categoryId">
         <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
       </select>
       <br>
       <label>Pet Types:</label>
-      <label ng-repeat="type in types">
-        <input type="checkbox" checklist-model="pet.types" checklist-value="type"> {{type.name}}
+      <label ng-repeat="tag in tags">
+        <input type="checkbox" checklist-model="pet.tags" checklist-value="tag"> {{tag.name}}
       </label>
       <br>
       <label>Status:</label>
