@@ -38,7 +38,7 @@ angular.module('petstoreUiApp')
         },
         status : $scope.status.toUpperCase(),
         photoUrls: [
-          'photoUrlString'
+          $scope.pet.photoUrl
         ],
         tags: $scope.pet.tags
         // TODO - input for PhotoURLs
