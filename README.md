@@ -5,6 +5,8 @@
 ### petstore-services ###
 * mvn clean package
 ### petstore-ui ###
+* npm install
+* bower install
 * grunt build
 
 ## How to run ##
