@@ -102,9 +102,6 @@ public class AppController {
 		if (pet.getName() == null || pet.getName().length() == 0) {
 			return false;
 		}
-		if (pet.getPhotoUrls() == null || pet.getPhotoUrls().size() == 0) {
-			return false;
-		}
 		return true;
 	}
 

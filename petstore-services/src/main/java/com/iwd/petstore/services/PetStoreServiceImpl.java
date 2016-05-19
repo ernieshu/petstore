@@ -39,9 +39,11 @@ public class PetStoreServiceImpl implements PetStoreService {
 		Pet pet = petRepository.save(petToBeInserted);
 
 		// commit any pet photo URLs
-		for (PetPhotoURL petPhotoUrl : petToBeInserted.getPhotoURLs()) {
-			petPhotoUrl.setPetId(pet.getId());
-			petPhotoUrlRepository.save(petPhotoUrl);
+		if (petToBeInserted.getPhotoURLs()!=null) {
+			for (PetPhotoURL petPhotoUrl : petToBeInserted.getPhotoURLs()) {
+				petPhotoUrl.setPetId(pet.getId());
+				petPhotoUrlRepository.save(petPhotoUrl);
+			}
 		}
 
 		if (pet != null) {

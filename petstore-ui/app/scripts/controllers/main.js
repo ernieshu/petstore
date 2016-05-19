@@ -25,25 +25,36 @@ angular.module('petstoreUiApp')
     ];
 
     $scope.pet = {
-      tags: [],
-      photoUrls: []
     };
 
     $scope.addAPet = function() {
 
       // pre-process the photoUrls, so that only strings are passed, rather than full objects
-      var photoUrlStrings = $scope.pet.photoUrls.map(function(photoUrl) { return photoUrl.text; });
+      var photoUrlStrings = [];
+      if ($scope.pet.photoUrls!=null) {
+        photoUrlStrings = $scope.pet.photoUrls.map(function(photoUrl) { return photoUrl.text; });
+      }
+
     	var petToBeAdded = {
-    		name : $scope.name,
-        category : {
-          id: $scope.pet.categoryId
-        },
-        status : $scope.status.toUpperCase(),
-        photoUrls: photoUrlStrings,
-        tags: $scope.pet.tags
-        // TODO - input for PhotoURLs
+    		name : $scope.name
     	};
+
+      // only populate certain items if they've been entered
+      if ($scope.pet.status!=null) {
+        petToBeAdded["status"] = $scope.pet.status.toUpperCase();
+      }
+      if ($scope.pet.categoryId!=null) {
+        petToBeAdded["category"] = { id: $scope.pet.categoryId };
+      }
+      if ($scope.pet.tags!=null) {
+        petToBeAdded["tags"] = $scope.pet.tags;
+      }
+      if (photoUrlStrings!=null) {
+        petToBeAdded["photoUrls"] = photoUrlStrings;
+      }
+
     	$http.post('pet', petToBeAdded).success(function(data) {
+        console.log('Entity created with id:' + data.id);
 	  	});
     };
 
