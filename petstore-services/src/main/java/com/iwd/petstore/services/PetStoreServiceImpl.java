@@ -27,6 +27,9 @@ public class PetStoreServiceImpl implements PetStoreService {
 	@Override
 	public Pet get(Integer petId) {
 		Pet returnPet = petRepository.findOne(petId);
+		if (returnPet==null) {
+			return null;
+		}
 		List<PetPhotoURL> petPhotoUrls = petPhotoUrlRepository.findByPetId(petId);
 		returnPet.setPhotoURLs(petPhotoUrls);
 		return returnPet;
