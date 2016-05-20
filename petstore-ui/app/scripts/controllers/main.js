@@ -53,10 +53,18 @@ angular.module('petstoreUiApp')
         petToBeAdded["photoUrls"] = photoUrlStrings;
       }
 
-    	$http.post('pet', petToBeAdded).success(function(data) {
-        console.log('Entity created with id:' + data.id);
-	  	});
-      // TODO error handling in success / failure function
+    	$http.post('pet', petToBeAdded)
+        .success(function(data) {
+          console.log('Entity created with id:' + data.id);
+	  	  })        
+        .error(function(data, status, headers, config){
+          if (status=='404') {
+            console.log("no pet found");
+          }
+          else if (status='500') {
+            console.log("system error");
+          }
+        });
     };
 
     $scope.findAPet = function(data) {
