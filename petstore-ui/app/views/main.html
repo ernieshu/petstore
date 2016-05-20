@@ -13,8 +13,8 @@
       </select>
       <br>
       <label>Pet Types:</label>
-      <label ng-repeat="tag in tags">
-        <input type="checkbox" checklist-model="pet.tags" checklist-value="tag"> {{tag.name}}
+      <label ng-repeat="inputTag in tags">
+        <input type="checkbox" checklist-model="pet.tags" checklist-value="inputTag"> {{tag.name}}
       </label>
       <br>
       <label>Status:</label>
@@ -25,18 +25,39 @@
       </select>
       <br>
       <label>Photo URLs:</label>
-      <!--input type="text" ng-model="pet.photoUrl" name="photoUrl"-->
       <tags-input ng-model="pet.photoUrls"></tags-input>
       <br>
-      <input type="submit" id="submit" value="Submit"/>
-      <!--pre>list={{list}}</pre-->
+      <input type="submit" id="submitCreate" value="SubmitCreate"/>
   </form>
 
   <h2>View a pet by ID</h2>
-  <p>
-    Input: ID; 
-    Output: Pet
-  </p>
+  <form ng-submit="findAPet()" ng-controller="MainCtrl">
+        Enter the search id, and press 'Search'.
+        <br>
+        <label>Pet Id</label>
+        <input type="text" ng-model="searchPetId" name="searchPetId" required/>
+        <br>
+        <input type="submit" id="submitSearch" value="SubmitSearch"/>
+        <div ng-show="viewPet!=null">
+          <br>
+          <label>Pet Id:</label>   {{viewPet.id}}
+          <br>
+          <label>Pet Name:</label>   {{viewPet.name}}
+          <br>
+          <label>Category Id / Name:</label>   {{viewPet.category.id}} / {{viewPet.category.name}}
+          <br>
+          <label>Status:</label>   {{viewPet.status}}
+          <br>
+          <label>Tags (Id / Name):</label>
+          <label ng-repeat="viewTag in viewPet.tags">
+            {{viewTag.id}} / {{viewTag.name}} <br>
+          </label>   
+          <label>Photo Urls:</label>
+          <label ng-repeat="photoUrl in viewPet.photoUrls"> {{photoUrl}} </label>
+        </div>
+  </form>
+
+
 
   <h2>Delete pet by ID</h2>
   <p>
