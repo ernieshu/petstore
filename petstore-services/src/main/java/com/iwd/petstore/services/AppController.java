@@ -38,6 +38,10 @@ public class AppController {
 	
 	ConversionUtils conversionUtils;
 
+	public AppController() {
+		
+	}
+	
 	@Autowired
 	public AppController(PetStoreService petStoreService, ConversionUtils conversionUtils) {
 		this.petStoreService = petStoreService;
