@@ -9,6 +9,7 @@ import org.junit.Test;
 import com.iwd.petstore.services.dao.domain.Category;
 import com.iwd.petstore.services.dao.domain.Pet;
 import com.iwd.petstore.services.dao.domain.PetStatus;
+import com.iwd.petstore.services.dao.domain.Tag;
 import com.iwd.petstore.services.domain.CategoryTo;
 import com.iwd.petstore.services.domain.PetTo;
 import com.iwd.petstore.services.domain.TagTo;
@@ -45,8 +46,9 @@ public class ConversionUtilsTest {
 		assertEquals(VALID_PHOTO_URL_ENTRY, petToCheck.getPhotoURLs().get(0).getPhotoURL());
 		assertNotNull(petToCheck.getTags());
 		assertEquals(1, petToCheck.getTags().size());
-//		assertEquals(VALID_TAG_ID, ((Tag)petToCheck.getTags().toArray()[0]).getId());
-//		assertEquals(VALID_TAG_NAME, ((Tag)petToCheck.getTags().toArray()[0]).getName());
+		Tag tagToCheck = (Tag) petToCheck.getTags().toArray()[0];
+		assertEquals(VALID_TAG_ID, tagToCheck.getId());
+		assertEquals(VALID_TAG_NAME, tagToCheck.getName());
 	}
 
 	
