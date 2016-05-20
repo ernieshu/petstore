@@ -56,20 +56,45 @@ angular.module('petstoreUiApp')
     	$http.post('pet', petToBeAdded).success(function(data) {
         console.log('Entity created with id:' + data.id);
 	  	});
+      // TODO error handling in success / failure function
     };
 
     $scope.findAPet = function(data) {
-	  	$http.get('pet/' + $scope.searchPetId).success(function(data) {
-        console.log("Retrieving info for pet name: " + data.name);
-	  		// if we've gotten the pet, map it back to the GUI
-        $scope.viewPet = {
-          id: data.id,
-          name: data.name,
-          category: data.category,
-          status: data.status,
-          tags: data.tags,
-          photoUrls: data.photoUrls
-        };
-	  	});
+	  	$http.get('pet/' + $scope.searchPetId)
+        .success(function(data, status, headers, config) {
+          console.log("Retrieving info for pet name: " + data.name);
+  	  		// if we've gotten the pet, map it back to the GUI
+          $scope.viewPet = {
+            id: data.id,
+            name: data.name,
+            category: data.category,
+            status: data.status,
+            tags: data.tags,
+            photoUrls: data.photoUrls
+          };
+  	  	})
+        .error(function(data, status, headers, config){
+          if (status=='404') {
+            console.log("no pet found");
+          }
+          else if (status='500') {
+            console.log("system error");
+          }
+        });
+    };
+
+    $scope.deleteAPet = function(data) {
+      $http.delete('pet/' + $scope.deletePetId)
+        .success( function(data) {
+          console.log("Successfully deleted pet with id " + $scope.deletePetId);
+        })
+        .error(function(data, status, headers, config){
+          if (status=='404') {
+            console.log("no pet found");
+          }
+          else if (status='500') {
+            console.log("system error");
+          }
+        });
     };
   });
