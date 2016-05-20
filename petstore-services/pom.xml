@@ -36,12 +36,20 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		
 	</dependencies>
 
-	<build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+	<!-- build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -57,7 +65,7 @@
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.iwd.petstore_services.AppController</mainClass>
+									<mainClass>com.iwd.petstore.services.AppController</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
@@ -65,5 +73,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build -->
 </project>
