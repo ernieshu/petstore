@@ -14,7 +14,7 @@
       <br>
       <label>Pet Types:</label>
       <label ng-repeat="inputTag in tags">
-        <input type="checkbox" checklist-model="pet.tags" checklist-value="inputTag"> {{tag.name}}
+        <input type="checkbox" checklist-model="pet.tags" checklist-value="inputTag"> {{inputTag.name}}
       </label>
       <br>
       <label>Status:</label>
@@ -37,7 +37,7 @@
         <label>Pet Id</label>
         <input type="text" ng-model="searchPetId" name="searchPetId" required/>
         <br>
-        <input type="submit" id="submitSearch" value="SubmitSearch"/>
+        <input type="submit" id="submitSearch" value="Search"/>
         <div ng-show="viewPet!=null">
           <br>
           <label>Pet Id:</label>   {{viewPet.id}}
@@ -60,9 +60,13 @@
 
 
   <h2>Delete pet by ID</h2>
-  <p>
-    Input: ID; 
-    Output: If successful or not
-  </p>
+  <form ng-submit="deleteAPet()" ng-controller="MainCtrl">
+        Enter the search id, and press 'Delete'.
+        <br>
+        <label>Pet Id</label>
+        <input type="text" ng-model="deletePetId" name="deletePetId" required/>
+        <br>
+        <input type="submit" id="deleteSearch" value="Delete"/>
+  </form>
 
 </div>
