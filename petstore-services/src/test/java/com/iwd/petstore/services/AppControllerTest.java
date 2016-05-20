@@ -6,30 +6,48 @@ import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.iwd.petstore.services.dao.domain.Pet;
 import com.iwd.petstore.services.dao.domain.PetPhotoURL;
 import com.iwd.petstore.services.domain.PetTo;
+import com.iwd.petstore.services.util.ConversionUtils;
+import com.iwd.petstore.services.util.ConversionUtilsImpl;
 
 /**
  * Unit test for simple App.
  */
-@RunWith(MockitoJUnitRunner.class)
 public class AppControllerTest {
-	@InjectMocks
-	AppController fixture = new AppController();
+	
 
 	@Mock
 	private PetStoreService petStoreService;
 
+	private ConversionUtils conversionUtils = new ConversionUtilsImpl();
+
+	static AppController fixture;
+	
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+		fixture = new AppController(petStoreService, conversionUtils);
+	}
+	
+	
 	@Test
 	public void getPet_InvalidInput() {
 		Integer invalidInput = -5;
@@ -50,7 +68,6 @@ public class AppControllerTest {
 		ResponseEntity<PetTo> testOutput = fixture.get(5);
 		assertEquals(testOutput.getStatusCode(), HttpStatus.OK);
 		assertNotNull(testOutput.getBody());
-
 	}
 
 	@Test

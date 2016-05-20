@@ -34,12 +34,16 @@ import com.iwd.petstore.services.util.ConversionUtils;
 @SpringBootApplication
 public class AppController {
 
-	@Autowired
 	PetStoreService petStoreService;
 	
-	@Autowired
 	ConversionUtils conversionUtils;
 
+	@Autowired
+	public AppController(PetStoreService petStoreService, ConversionUtils conversionUtils) {
+		this.petStoreService = petStoreService;
+		this.conversionUtils = conversionUtils;
+	}
+	
 	@RequestMapping(value = "/pet/{petId}", method = { RequestMethod.GET })
 	@ResponseBody
 	@Transactional(readOnly = true)
