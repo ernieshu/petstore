@@ -31,20 +31,19 @@ import com.iwd.petstore.services.util.ConversionUtilsImpl;
 /**
  * Unit test for simple App.
  */
-public class AppControllerTest {
+public class PetControllerTest {
 	
-
 	@Mock
 	private PetStoreService petStoreService;
 
 	private ConversionUtils conversionUtils = new ConversionUtilsImpl();
 
-	static AppController fixture;
+	static PetController fixture;
 	
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
-		fixture = new AppController(petStoreService, conversionUtils);
+		fixture = new PetController(petStoreService, conversionUtils);
 	}
 	
 	
