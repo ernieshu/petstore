@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.iwd.petstore.services.dao.domain.Category;
 import com.iwd.petstore.services.dao.domain.Pet;
+import com.iwd.petstore.services.dao.domain.PetPhotoURL;
 import com.iwd.petstore.services.dao.domain.PetStatus;
 import com.iwd.petstore.services.dao.domain.Tag;
 import com.iwd.petstore.services.domain.CategoryTo;
@@ -29,7 +30,7 @@ public class ConversionUtilsTest {
 	public static final String VALID_TAG_NAME = "Tag 0";
 	
 	@Test
-	public void testConvertingPet() {
+	public void testConvertingPetTo() {
 
 		PetTo validPetTo = createValidPetTo();
 		
@@ -51,7 +52,48 @@ public class ConversionUtilsTest {
 		assertEquals(VALID_TAG_NAME, tagToCheck.getName());
 	}
 
+	@Test
+	public void testConvertingPet() {
+		
+		PetTo petToToTest = fixture.convert(createValidPet());
+		
+		assertNotNull(petToToTest);
+		assertNotNull(petToToTest.getCategory());
+		assertEquals(VALID_CATEGORY_ID, petToToTest.getCategory().getId());
+		assertEquals(VALID_CATEGORY_NAME, petToToTest.getCategory().getName());
+		assertEquals(VALID_PET_ID, petToToTest.getId());
+		assertEquals(VALID_PET_NAME, petToToTest.getName());
+		assertNotNull(petToToTest.getPhotoUrls());
+		assertEquals(1, petToToTest.getPhotoUrls().size());
+		
+		assertEquals(VALID_PET_STATUS, petToToTest.getStatus());
+		assertNotNull(petToToTest.getTags());
+		assertEquals(1, petToToTest.getTags().size());
+		assertEquals(VALID_CATEGORY_ID, petToToTest.getTags().get(0).getId());
+		assertEquals(VALID_CATEGORY_NAME, petToToTest.getTags().get(0).getName());
+		
+	}
 	
+	private Pet createValidPet() {
+		Pet validPet = new Pet();
+		Category validCategory = new Category();
+		validCategory.setId(VALID_CATEGORY_ID);
+		validCategory.setName(VALID_CATEGORY_NAME);
+		validPet.setCategory(validCategory);
+		validPet.setId(VALID_PET_ID);
+		validPet.setName(VALID_PET_NAME);
+		PetPhotoURL petPhotoURL = new PetPhotoURL();
+		petPhotoURL.setPetId(VALID_PET_ID);
+		petPhotoURL.setPhotoURL(VALID_PHOTO_URL_ENTRY);
+		validPet.setPhotoURLs(Collections.singletonList(petPhotoURL));
+		validPet.setStatus(VALID_PET_STATUS);
+		Tag validTag = new Tag();
+		validTag.setId(VALID_TAG_ID);
+		validTag.setName(VALID_TAG_NAME);
+		validPet.setTags(Collections.singleton(validTag));
+		return validPet;
+	}
+
 	private PetTo createValidPetTo() {
 		PetTo petTo = new PetTo();
 		CategoryTo validCategory = new CategoryTo();
