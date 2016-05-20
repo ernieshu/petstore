@@ -69,8 +69,8 @@ public class ConversionUtilsTest {
 		assertEquals(VALID_PET_STATUS, petToToTest.getStatus());
 		assertNotNull(petToToTest.getTags());
 		assertEquals(1, petToToTest.getTags().size());
-		assertEquals(VALID_CATEGORY_ID, petToToTest.getTags().get(0).getId());
-		assertEquals(VALID_CATEGORY_NAME, petToToTest.getTags().get(0).getName());
+		assertEquals(VALID_TAG_ID, petToToTest.getTags().get(0).getId());
+		assertEquals(VALID_TAG_NAME, petToToTest.getTags().get(0).getName());
 		
 	}
 	
