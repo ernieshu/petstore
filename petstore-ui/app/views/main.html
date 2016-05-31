@@ -1,60 +1,7 @@
 <div>
-  <h2>Add a New Pet to the Store</h2>
-  <br>
-  <form ng-submit="mainCtrl.addAPet()" ng-controller="MainCtrl as mainCtrl">
-      Enter the pet info, and press 'Submit'.
-      <div class="row">
-        <label class="col-md-6">Pet Name:</label>
-        <input class="col-md-6" type="text" ng-model="mainCtrl.pet.name" name="name" required/>
-      </div>
-      <div class="row">
-      <label class="col-md-6">Category Id:</label>
-      <select class="col-md-6" ng-model="mainCtrl.pet.categoryId" name="categoryId">
-        <option ng-repeat="category in mainCtrl.categories" value="{{category.id}}">{{category.name}}</option>
-      </select>
-      <!--div ng-repeat="category in mainCtrl.categories" class="btn-group">
-          <label class="btn btn-success" ng-model="mainCtrl.pet.categoryId" uib-btn-radio="{{category.id}}" uncheckable>{{category.name}}</label>
-          <label class="btn btn-success" ng-model="mainCtrl.pet.categoryId" uib-btn-radio="{{category.id}}" uncheckable>{{category.name}}</label>
-          <label class="btn btn-success" ng-model="mainCtrl.pet.categoryId" uib-btn-radio="{{category.id}}" uib-uncheckable="uncheckable">{{category.name}}</label>
-      </div-->
-      </div>
-      <div class="row">
-        <label class="col-md-6">Pet Types:</label>
-        <div class="col-md-6">
-          <label ng-repeat="inputTag in mainCtrl.tags">
-            <input type="checkbox" checklist-model="mainCtrl.pet.tags" checklist-value="inputTag"> {{inputTag.name}}
-          </label>
-        </div>
-      </div>
-      <div class="row">
-        <label class="col-md-6">Status:</label>
-        <div class="col-md-6">
-          <select ng-model="mainCtrl.pet.status" name="status" required>
-            <option>Available</option>
-            <option>Pending</option>
-            <option>Sold</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <label class="col-md-6">Photo URLs:</label>
-        <tags-input class="col-md-6" ng-model="mainCtrl.pet.photoUrls"></tags-input>
-      </div>
-      <input type="submit" id="submitCreate" value="SubmitCreate"/>
-  </form>
 
+  <h1>Petstore!</h1>
 
-
-
-
-  <h2>Delete pet by ID</h2>
-  <form ng-submit="mainCtrl.deleteAPet()" ng-controller="MainCtrl as mainCtrl">
-        Enter the search id, and press 'Delete'.
-        <div class="row">
-          <label class="col-md-6">Pet Id</label>
-          <input class="col-md-6" type="text" ng-model="mainCtrl.deletePetId" name="deletePetId" required/>
-        </div>
-        <input type="submit" id="deleteSearch" value="Delete"/>
-  </form>
+  <p>Click on one of the navigation links above to perform requested operations.</p>
 
 </div>
