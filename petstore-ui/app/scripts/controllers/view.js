@@ -1,3 +1,4 @@
+'use strict';
 angular.module('petstoreUiApp')
   .controller('ViewCtrl', function ($scope, $http) {
 
@@ -18,6 +19,7 @@ angular.module('petstoreUiApp')
         .error(function(data, status, headers, config){
           if (status=='404') {
             console.log("no pet found");
+            $scope.viewPet = null;
           }
           else if (status='500') {
             console.log("system error");
