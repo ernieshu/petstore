@@ -11,7 +11,11 @@ Run `grunt` for building and `grunt serve` for preview.
 
 Running `grunt test` will run the unit tests with karma.
 
+On a Windows 7 / 8 / 10 machine, it was found that installing PhantomJS globally was necessary (npm install -g phantomjs), and set the value of 'PHANTOMJS_BIN' to equal the return value of 'which phantomjs'.
+
+
 ## Customization Additions
+
 * Added 'ng tags input' library for multiple single input
 * Added 'bootstrap' for much nicer look and feel
 ** Note that had to revert to bootstrap version 3.3.4 
