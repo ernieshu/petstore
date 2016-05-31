@@ -1,0 +1,56 @@
+<div>
+  <h2>View a pet by ID</h2>
+  <form ng-submit="viewCtrl.findAPet()" ng-controller="ViewCtrl as viewCtrl">
+        Enter the search id, and press 'Search'.
+        <div class="row">
+          <label class="col-md-6">Pet Id</label>
+          <input class="col-md-6" type="text" ng-model="viewCtrl.searchPetId" name="searchPetId" required/>
+        </div>
+        <input type="submit" id="submitSearch" value="Search"/>
+        <div ng-show="viewPet!=null && viewPet.id!=null">
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">Pet Id:
+            </div>   
+            <div class="col-md-5">{{viewPet.id}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">Pet Name:
+            </div>   
+            <div class="col-md-5">{{viewPet.name}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">Category Id / Name:
+            </div>   
+            <div class="col-md-5">{{viewPet.category.id}} / {{viewPet.category.name}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">Status:
+            </div>   
+            <div class="col-md-5">{{viewPet.status}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">Tags (Id / Name):
+            </div>   
+            <div class="col-md-5">
+              <div ng-repeat="viewTag in viewPet.tags">
+                {{viewTag.id}} / {{viewTag.name}}
+              </div>
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">Photo Urls:
+            </div>   
+            <div class="col-md-5">
+              <div ng-repeat="photoUrl in viewPet.photoUrls">
+                {{photoUrl}}
+              </div>
+            </div>
+          </div>
+        </div>
+  </form>
+
+</div>
