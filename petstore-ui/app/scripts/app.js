@@ -26,9 +26,17 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/delete', {
+        templateUrl: 'views/delete.html',
+        controller: 'DeleteCtrl'
+      })
       .when('/view', {
         templateUrl: 'views/view.html',
         controller: 'ViewCtrl'
+      })
+      .when('/create', {
+        templateUrl: 'views/create.html',
+        controller: 'CreateCtrl'
       })
       .otherwise({
         redirectTo: '/'
