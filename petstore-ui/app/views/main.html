@@ -1,44 +1,44 @@
 <div>
   <h2>Add a New Pet to the Store</h2>
   <br>
-  <form ng-submit="addAPet()" ng-controller="MainCtrl">
+  <form ng-submit="mainCtrl.addAPet()" ng-controller="MainCtrl as mainCtrl">
       Enter the pet info, and press 'Submit'.
       <br>
       <label>Pet Name:</label>
-      <input type="text" ng-model="name" name="name" required/>
+      <input type="text" ng-model="mainCtrl.pet.name" name="name" required/>
       <br>
       <label>Category Id:</label>
-      <select ng-model="pet.categoryId" name="categoryId">
-        <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+      <select ng-model="mainCtrl.pet.categoryId" name="categoryId">
+        <option ng-repeat="category in mainCtrl.categories" value="{{category.id}}">{{category.name}}</option>
       </select>
       <br>
       <label>Pet Types:</label>
-      <label ng-repeat="inputTag in tags">
-        <input type="checkbox" checklist-model="pet.tags" checklist-value="inputTag"> {{inputTag.name}}
+      <label ng-repeat="inputTag in mainCtrl.tags">
+        <input type="checkbox" checklist-model="mainCtrl.pet.tags" checklist-value="inputTag"> {{inputTag.name}}
       </label>
       <br>
       <label>Status:</label>
-      <select ng-model="pet.status" name="status" required>
+      <select ng-model="mainCtrl.pet.status" name="status" required>
         <option>Available</option>
         <option>Pending</option>
         <option>Sold</option>
       </select>
       <br>
       <label>Photo URLs:</label>
-      <tags-input ng-model="pet.photoUrls"></tags-input>
+      <tags-input ng-model="mainCtrl.pet.photoUrls"></tags-input>
       <br>
       <input type="submit" id="submitCreate" value="SubmitCreate"/>
   </form>
 
   <h2>View a pet by ID</h2>
-  <form ng-submit="findAPet()" ng-controller="MainCtrl">
+  <form ng-submit="mainCtrl.findAPet()" ng-controller="MainCtrl as mainCtrl">
         Enter the search id, and press 'Search'.
         <br>
         <label>Pet Id</label>
-        <input type="text" ng-model="searchPetId" name="searchPetId" required/>
+        <input type="text" ng-model="mainCtrl.searchPetId" name="searchPetId" required/>
         <br>
         <input type="submit" id="submitSearch" value="Search"/>
-        <div ng-show="viewPet!=null">
+        <div ng-show="viewPet!=null && viewPet.id!=null">
           <br>
           <label>Pet Id:</label>   {{viewPet.id}}
           <br>
@@ -53,18 +53,18 @@
             {{viewTag.id}} / {{viewTag.name}} <br>
           </label>   
           <label>Photo Urls:</label>
-          <label ng-repeat="photoUrl in viewPet.photoUrls"> {{photoUrl}} </label>
+          <label ng-repeat="photoUrl in viewPet.photoUrls"> {{mainCtrl.photoUrl}} </label>
         </div>
   </form>
 
 
 
   <h2>Delete pet by ID</h2>
-  <form ng-submit="deleteAPet()" ng-controller="MainCtrl">
+  <form ng-submit="mainCtrl.deleteAPet()" ng-controller="MainCtrl as mainCtrl">
         Enter the search id, and press 'Delete'.
         <br>
         <label>Pet Id</label>
-        <input type="text" ng-model="deletePetId" name="deletePetId" required/>
+        <input type="text" ng-model="mainCtrl.deletePetId" name="deletePetId" required/>
         <br>
         <input type="submit" id="deleteSearch" value="Delete"/>
   </form>

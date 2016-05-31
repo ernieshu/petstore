@@ -10,47 +10,49 @@
 angular.module('petstoreUiApp')
   .controller('MainCtrl', function ($scope, $http) {
 
-    $scope.categories = [
+    this.categories = [
       { id: 0, name: 'Category 0'},
       { id: 1, name: 'Category 1'},
-      { id: 2, name: 'Category 2'},
       { id: 3, name: 'Category 3'}
     ];
 
-    $scope.tags = [
+    this.tags = [
       { id: 0, name: 'Tag 0'},
       { id: 1, name: 'Tag 1'},
       { id: 2, name: 'Tag 2'},
       { id: 3, name: 'Tag 3'}
     ];
 
-    $scope.pet = {
+    this.pet = {
     };
 
-    $scope.addAPet = function() {
+    $scope.viewPet = {
+    };
+
+    this.addAPet = function() {
 
       // pre-process the photoUrls, so that only strings are passed, rather than full objects
       var photoUrlStrings = [];
-      if ($scope.pet.photoUrls!=null) {
-        photoUrlStrings = $scope.pet.photoUrls.map(function(photoUrl) { return photoUrl.text; });
+      if (this.pet.photoUrls!==null) {
+        photoUrlStrings = this.pet.photoUrls.map(function(photoUrl) { return photoUrl.text; });
       }
 
     	var petToBeAdded = {
-    		name : $scope.name
+    		name : this.pet.name
     	};
 
       // only populate certain items if they've been entered
-      if ($scope.pet.status!=null) {
-        petToBeAdded["status"] = $scope.pet.status.toUpperCase();
+      if (this.pet.status!==null) {
+        petToBeAdded['status'] = this.pet.status.toUpperCase();
       }
-      if ($scope.pet.categoryId!=null) {
-        petToBeAdded["category"] = { id: $scope.pet.categoryId };
+      if (this.pet.categoryId!==null) {
+        petToBeAdded['category'] = { id: this.pet.categoryId };
       }
-      if ($scope.pet.tags!=null) {
-        petToBeAdded["tags"] = $scope.pet.tags;
+      if (this.pet.tags!==null) {
+        petToBeAdded['tags'] = this.pet.tags;
       }
-      if (photoUrlStrings!=null) {
-        petToBeAdded["photoUrls"] = photoUrlStrings;
+      if (photoUrlStrings!==null) {
+        petToBeAdded['photoUrls'] = photoUrlStrings;
       }
 
     	$http.post('pet', petToBeAdded)
@@ -67,8 +69,8 @@ angular.module('petstoreUiApp')
         });
     };
 
-    $scope.findAPet = function(data) {
-	  	$http.get('pet/' + $scope.searchPetId)
+    this.findAPet = function(data) {
+	  	$http.get('pet/' + this.searchPetId)
         .success(function(data, status, headers, config) {
           console.log("Retrieving info for pet name: " + data.name);
   	  		// if we've gotten the pet, map it back to the GUI
@@ -91,10 +93,10 @@ angular.module('petstoreUiApp')
         });
     };
 
-    $scope.deleteAPet = function(data) {
-      $http.delete('pet/' + $scope.deletePetId)
+    this.deleteAPet = function(data) {
+      $http.delete('pet/' + this.deletePetId)
         .success( function(data) {
-          console.log("Successfully deleted pet with id " + $scope.deletePetId);
+          console.log("Successfully deleted pet");
         })
         .error(function(data, status, headers, config){
           if (status=='404') {
