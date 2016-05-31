@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'checklist-model',
-    'ngTagsInput'
+    'ngTagsInput',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider

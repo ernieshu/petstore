@@ -4,13 +4,19 @@
   <form ng-submit="mainCtrl.addAPet()" ng-controller="MainCtrl as mainCtrl">
       Enter the pet info, and press 'Submit'.
       <br>
-      <label>Pet Name:</label>
-      <input type="text" ng-model="mainCtrl.pet.name" name="name" required/>
+      <label class="col-md-6">Pet Name:</label>
+      <input class="col-md-6" type="text" ng-model="mainCtrl.pet.name" name="name" required/>
       <br>
       <label>Category Id:</label>
       <select ng-model="mainCtrl.pet.categoryId" name="categoryId">
         <option ng-repeat="category in mainCtrl.categories" value="{{category.id}}">{{category.name}}</option>
       </select>
+      <!--div ng-repeat="category in mainCtrl.categories" class="btn-group">
+          <label class="btn btn-success" ng-model="mainCtrl.pet.categoryId" uib-btn-radio="{{category.id}}" uncheckable>{{category.name}}</label>
+          <label class="btn btn-success" ng-model="mainCtrl.pet.categoryId" uib-btn-radio="{{category.id}}" uncheckable>{{category.name}}</label>
+          <label class="btn btn-success" ng-model="mainCtrl.pet.categoryId" uib-btn-radio="{{category.id}}" uib-uncheckable="uncheckable">{{category.name}}</label>
+      </div-->
+
       <br>
       <label>Pet Types:</label>
       <label ng-repeat="inputTag in mainCtrl.tags">
