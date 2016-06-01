@@ -121,10 +121,6 @@ module.exports = function (grunt) {
             port: 8080,
             https: false,
             xforward: false
-            // Match redirect to JBoss Context Root
-            // rewrite: {
-            //     '^/restui': '/ifast-config-app/restui'
-            // }
         }
       ]
     },
