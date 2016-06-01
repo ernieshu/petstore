@@ -16,7 +16,6 @@ describe('Controller: ViewCtrl', function () {
     httpBackend = $httpBackend;
 
     // valid response
-    // httpBackend.when("GET", "/pet/1").respond([{}, {}, {}]);
     httpBackend.when("GET", "/pet/1").respond([200]);
     // invalid response
     httpBackend.when("GET", "/pet/-1").respond(function(method, url, data, headers, params) {
