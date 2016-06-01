@@ -19,6 +19,8 @@ angular.module('petstoreUiApp')
     this.pet = {
     };
 
+    this.feedbackMessage;
+
     this.addAPet = function() {
 
       // pre-process the photoUrls, so that only strings are passed, rather than full objects
@@ -47,13 +49,10 @@ angular.module('petstoreUiApp')
 
       $http.post('pet', petToBeAdded)
         .success(function(data) {
-          console.log('Entity created with id:' + data.id);
+          $scope.feedbackMessage = 'Entity created with id:' + data.id;
         })        
         .error(function(data, status, headers, config){
-          if (status=='404') {
-            console.log("no pet found");
-          }
-          else if (status='500') {
+          if (status='500') {
             console.log("system error");
           }
         });
