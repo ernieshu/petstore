@@ -7,8 +7,10 @@
           <input class="col-md-6" type="text" ng-model="viewCtrl.searchPetId" name="searchPetId" required/>
         </div>
         <input type="submit" id="submitSearch" value="Search"/>
-        <div class="row control-group" ng-show="feedbackMessage!=null && feedbackMessage.length>0">
-          <label class="col-md-6">{{feedbackMessage}}</label>
+        <div class="row panel-danger" ng-show="feedbackMessage!=null && feedbackMessage.length>0">
+          <div class="alert col-md-6" style="background-color:white;color:#3c763d" role="alert">
+            {{feedbackMessage}}
+          </div>
         </div>
         <div ng-show="viewPet!=null && viewPet.id!=null">
           <div class="row">
