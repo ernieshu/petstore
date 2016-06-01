@@ -9,6 +9,10 @@
     * Pet --> PhotoURLs - 1:Many
     * Pet --> Status - Enum
 
+## Controller Layer
 * For create interface, did validation
      * If invalid, return a 'bad request (HTTP 400)' rather than the specified 405
 
+* Note that there's a transformation layer, between UI / backend tier Transfer Object, and backend Domain Object
+	* used JPA to resolve transformations
+	
