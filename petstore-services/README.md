@@ -10,5 +10,5 @@
     * Pet --> Status - Enum
 
 * For create interface, did validation
-** If invalid, return a 'bad request (HTTP 400)' rather than the specified 405
+     * If invalid, return a 'bad request (HTTP 400)' rather than the specified 405
 
