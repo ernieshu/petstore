@@ -11,6 +11,8 @@ describe('Controller: ViewCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $httpBackend, $http) {
 
+    scope = $rootScope;
+
     httpBackend = $httpBackend;
 
     // valid response
@@ -32,11 +34,38 @@ describe('Controller: ViewCtrl', function () {
   });
 
   it('view controller should make a http get call and be successful', function () {
+
+      var mockPet = {
+        "id": 1,
+        "name": "pet name",
+        "category": {
+            "id": 1,
+            "name": "Category 1"
+        },
+        "photoUrls": [
+            "sadfasfdx",
+            "sdfasdf"
+        ],
+        "tags": [
+            {
+                "id": 0,
+                "name": "Tags 0"
+            },
+            {
+                "id": 1,
+                "name": "Tags 1"
+            }
+        ],
+        "status": "AVAILABLE"
+      }
       ViewCtrl.searchPetId = 1;
       ViewCtrl.findAPet();
-      // TODO augment the test below to also return a dummy pet
-      httpBackend.expectGET('pet/1').respond([200]);
-      // TODO check to see the expected pet on the scope
+      httpBackend.expectGET('pet/1').respond([200, mockPet, {}]);
+      // check to see the expected pet on the scope
+      expect(scope.viewPet).not.toBe(null);
+      // expect(scope.viewPet.id).not.toBe(null);
+      // expect(scope.viewPet.id).toBe(1);
+      // expect(scope.viewPet.name).toBe('mockPet');
       httpBackend.flush();
   });
 
@@ -44,9 +73,8 @@ describe('Controller: ViewCtrl', function () {
   it('should return 404 when the invalid pet is sent back', function () {
       ViewCtrl.searchPetId = -1;
       ViewCtrl.findAPet();
-      // TODO augment the test below to also return a dummy pet
       httpBackend.expectGET('pet/-1').respond([404]);
-      // TODO check to see the expected pet on the scope
+      expect(scope.viewPet).toBeUndefined();
       httpBackend.flush();
   });  
 });
