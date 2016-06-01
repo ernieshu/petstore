@@ -16,9 +16,9 @@ describe('Controller: ViewCtrl', function () {
     httpBackend = $httpBackend;
 
     // valid response
-    httpBackend.when("GET", "/pet/1").respond([200]);
+    httpBackend.when('GET', '/pet/1').respond([200]);
     // invalid response
-    httpBackend.when("GET", "/pet/-1").respond(function(method, url, data, headers, params) {
+    httpBackend.when('GET', '/pet/-1').respond(function(method, url, data, headers, params) {
       return [404];
     });
 
@@ -35,27 +35,27 @@ describe('Controller: ViewCtrl', function () {
   it('view controller should make a http get call and be successful', function () {
 
       var mockPet = {
-        "id": 1,
-        "name": "pet name",
-        "category": {
-            "id": 1,
-            "name": "Category 1"
+        'id': 1,
+        'name': 'pet name',
+        'category': {
+            'id': 1,
+            'name': 'Category 1'
         },
-        "photoUrls": [
-            "sadfasfdx",
-            "sdfasdf"
+        'photoUrls': [
+            'sadfasfdx',
+            'sdfasdf'
         ],
-        "tags": [
+        'tags': [
             {
-                "id": 0,
-                "name": "Tags 0"
+                'id': 0,
+                'name': 'Tags 0'
             },
             {
-                "id": 1,
-                "name": "Tags 1"
+                'id': 1,
+                'name': 'Tags 1'
             }
         ],
-        "status": "AVAILABLE"
+        'status': 'AVAILABLE'
       }
       ViewCtrl.searchPetId = 1;
       ViewCtrl.findAPet();
