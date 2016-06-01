@@ -4,14 +4,14 @@ angular.module('petstoreUiApp')
     this.deleteAPet = function(data) {
       $http.delete('pet/' + this.deletePetId)
         .success( function(data) {
-          console.log("Successfully deleted pet");
+          $scope.feedbackMessage = 'Successfully deleted pet';
         })
         .error(function(data, status, headers, config){
-          if (status=='404') {
-            console.log("no pet found");
+          if (status===404) {
+            $scope.feedbackMessage = 'No pet found';
           }
-          else if (status='500') {
-            console.log("system error");
+          else {
+            $scope.feedbackMessage = 'System error';
           }
         });
     };

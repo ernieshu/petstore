@@ -1,9 +1,12 @@
   <h2>Delete pet by ID</h2>
-  <form ng-submit="deleteCtrl.deleteAPet()" ng-controller="MainCtrl as deleteCtrl">
+  <form ng-submit="deleteCtrl.deleteAPet()" ng-controller="DeleteCtrl as deleteCtrl">
         Enter the search id, and press 'Delete'.
         <div class="row">
           <label class="col-md-6">Pet Id</label>
           <input class="col-md-6" type="text" ng-model="deleteCtrl.deletePetId" name="deletePetId" required/>
         </div>
         <input type="submit" id="deleteSearch" value="Delete"/>
+        <div class="row control-group" ng-show="feedbackMessage!=null && feedbackMessage.length>0">
+        	<label class="col-md-6">{{feedbackMessage}}</label>
+      	</div>
   </form>

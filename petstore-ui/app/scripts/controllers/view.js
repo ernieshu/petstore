@@ -15,14 +15,16 @@ angular.module('petstoreUiApp')
             tags: data.tags,
             photoUrls: data.photoUrls
           };
+          $scope.feedbackMessage = null;
         })
         .error(function(data, status, headers, config){
-          if (status=='404') {
-            console.log("no pet found");
+          if (status===404) {
+            $scope.feedbackMessage = 'No pet found';
             $scope.viewPet = null;
           }
-          else if (status='500') {
-            console.log("system error");
+          else {
+            $scope.feedbackMessage = 'System error';
+            $scope.viewPet = null;
           }
         });
     };
