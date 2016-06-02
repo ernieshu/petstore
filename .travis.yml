@@ -1,5 +1,6 @@
 language: java
 before_script: cd petstore-services
+script: mvn clean install -DskipTests
 deploy:
   edge: true
   provider: cloudfoundry
