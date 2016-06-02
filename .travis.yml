@@ -1,2 +1,12 @@
 language: java
 before_script: cd petstore-services
+deploy:
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: ernie.shu@gmail.com
+  password:
+    secure: Jqq7gx0LyCRWFUZXivMQ5N6n4O1E/Hapnn9Lx9MPEDQdAGI7jJdYbjU9xmyiTV5CpGMT4amnyMr33ZcTFc7GjLMsGCa5IRgFhhqr0fqolZiFrElfpVGTtx6Ob9bYKDsLSU04HXwJ0QPruSkwLxnfSZ+ip+5RRyl0lCK3Vf/hGh4/o7TxFYUSR76P6bnRtzKjgHHrHNeHSj9ZJGA+e3sHggQ4iUuAAfIpSSI89nzDAY4k/K7NtNFSiI+i71VXb7uY9jJmBAUZ7e3jeuXfZSfE4zv6FFtenmkQPPoe5JpJfdBh+xbWWtpbi9Vy0T8ePixE37LXrwOK8vjbuKNGkYZtmhZsxqXND+idmzbwiTNb6LG0escnASDKZdlGPNziWO5np7lT1ctGGYPTqvLa4qRKG+VHfIzD7S+pk9uuuaKi1Z0Bczgy+9Af6dlmnPYDnc7+sTK9HYECzs8ddDsWyVtkYPp0pfTuk8jryeGCPtZga7Gn2wKvuo3xBINl3jy4p8tZb2B48xcCWo47Dl+bdqYjGhwprsY2FnrGROgtdrud4Z6aipqZwpmP2ewLYNSzehAgQY/KPHPKn4OSRuh71JZPgholtBIB+20uHWYlTwBzn/g76odRfizbDUBfxVAUXa3Gr3mS5vyFyr00DQmpb1DKISRVfxCtVihDpZNRGslZb9Q=
+  organization: ernie.shu.org
+  space: development
+  on:
+    repo: ernieshu/petstore
