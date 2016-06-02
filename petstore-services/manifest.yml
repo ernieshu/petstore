@@ -1,3 +1,6 @@
 ---
 applications:
   - name: petstore-services
+    memory: 512M
+    instances: 1
+    random-route: true
