@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import antlr.StringUtils;
 
 public enum PetStatus {
 
@@ -18,6 +21,11 @@ public enum PetStatus {
         namesMap.put("SOLD", SOLD);
     }	
 	
+    @JsonCreator
+    public static PetStatus forValue(String value) {
+        return namesMap.get(value.toUpperCase());
+    }
+    
     @JsonValue
     public String toValue() {
         for (Entry<String, PetStatus> entry : namesMap.entrySet()) {
