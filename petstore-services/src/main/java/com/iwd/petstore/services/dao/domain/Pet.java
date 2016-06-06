@@ -57,14 +57,14 @@ public class Pet implements Serializable {
 
 	public PetStatus getStatus() {
 		if (statusName != null) {
-			return PetStatus.getEnum(statusName);
+			return Enum.valueOf(PetStatus.class, statusName);
 		} else {
 			return null;
 		}
 	}
 
 	public void setStatus(PetStatus status) {
-		this.statusName = status.getStatusName();
+		this.statusName = status.toString();
 	}
 
 	public Category getCategory() {
