@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iwd.petstore.services.dao.domain.Pet;
 import com.iwd.petstore.services.dao.domain.PetPhotoURL;
-import com.iwd.petstore.services.dao.respositories.PetPhotoURLRepository;
-import com.iwd.petstore.services.dao.respositories.PetRespository;
+import com.iwd.petstore.services.dao.repositories.PetPhotoURLRepository;
+import com.iwd.petstore.services.dao.repositories.PetRespository;
 
 @Component("petStoreService")
 @Transactional

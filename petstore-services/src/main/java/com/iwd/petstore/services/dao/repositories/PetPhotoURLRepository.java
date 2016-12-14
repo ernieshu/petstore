@@ -1,4 +1,4 @@
-package com.iwd.petstore.services.dao.respositories;
+package com.iwd.petstore.services.dao.repositories;
 
 import java.util.List;
 
