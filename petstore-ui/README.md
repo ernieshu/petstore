@@ -18,5 +18,5 @@ On a Windows 7 / 8 / 10 machine, it was found that installing PhantomJS globally
 
 * Added 'ng tags input' library for multiple single input
 * Added 'bootstrap' for much nicer look and feel
-** Note that had to revert to bootstrap version 3.3.4 
-** Execute via commands 'npm install bootstrap@3.3.4 --save/ bower install bootstrap#3.3.4 --save'
+    * Note that had to revert to bootstrap version 3.3.4 
+    * Execute via commands 'npm install bootstrap@3.3.4 --save/ bower install bootstrap#3.3.4 --save'
