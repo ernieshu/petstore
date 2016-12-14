@@ -82,7 +82,7 @@ public class PetController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	@Bean
+	@Bean //FIXME - for demo purposes only
 	public ServletRegistrationBean h2ServletRegistration() {
 		ServletRegistrationBean registration = new ServletRegistrationBean(new WebServlet());
 		registration.addUrlMappings("/console/*");
