@@ -10,4 +10,4 @@ deploy:
   organization: ernie.shu.org
   space: development
   on:
-    repo: ernieshu/petstore
+    repo: ernieshu/petstore-services
