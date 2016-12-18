@@ -1,5 +1,4 @@
 language: java
-before_script: cd petstore-services
 script: mvn clean install
 deploy:
   edge: true
