@@ -1,20 +1,18 @@
-# Petstore # 
+# Implementation Notes
 
-## How to build ##
+* For tags and categories, made FK reference tables
 
-### petstore-services ###
-* mvn clean package
-### petstore-ui ###
-* npm install
-* bower install
-* grunt build
+* For data model, used a model with FKs, with the following mappings
 
-## How to run ##
+    * Pet --> Category - 1:1, with Categories as a static list
+    * Pet --> Tag - Many: Many, with Tags as a static list
+    * Pet --> PhotoURLs - 1:Many
+    * Pet --> Status - Enum
 
-### Running the backend API ###
-* java -jar target/petstore-services.jar
-OR 
-* run com.iwd.petstore_serivces.AppController as a Java Application in Eclipse
+## Controller Layer
+* For create interface, did validation
+     * If invalid, return a 'bad request (HTTP 400)' rather than the specified 405
 
-### Running the frontend ###
-* grunt serve
+* Note that there's a transformation layer, between UI / backend tier Transfer Object, and backend Domain Object
+	* used JPA to resolve transformations
+	

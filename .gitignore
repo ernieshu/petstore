@@ -1,2 +1,5 @@
-petstore-services/.settings/org.eclipse.core.resources.prefs
-petstore-services/.settings/org.eclipse.jdt.core.prefs
+/target/
+.classpath
+.project
+.settings
+
