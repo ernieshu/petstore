@@ -18,3 +18,12 @@
 	
 # How to build and run
 ./buildAndRunMe.sh
+
+# TODO
+Find below a list of items that would make this implementation better / more complete.
+* Completion of Integration tests
+  * Automated RESTful tests, that run against the API tier, with an in-memory DB running against said backend
+  * In-memory DB should contain a known data set, to support positive and negative integration tests
+* Maven release configuration.
+* Migration to a proper backend DB, including:
+  * usage of Flyway / Liquibase
