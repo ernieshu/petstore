@@ -1,4 +1,4 @@
-package com.iwd.petstore.services;
+package com.iwd.petstore.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

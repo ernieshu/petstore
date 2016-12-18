@@ -1,4 +1,4 @@
-package com.iwd.petstore.services;
+package com.iwd.petstore.controller;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.iwd.petstore.services.PetStoreService;
 import com.iwd.petstore.services.dao.domain.Pet;
 import com.iwd.petstore.services.domain.PetTo;
 import com.iwd.petstore.services.util.ConversionUtils;
