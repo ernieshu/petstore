@@ -15,6 +15,9 @@
 
 * Note that there's a transformation layer, between UI / backend tier Transfer Object, and backend Domain Object
 	* used JPA to resolve transformations
+
+## Service Layer
+* Communicates with the persistence store
 	
 # How to build and run
 ./buildAndRunMe.sh
