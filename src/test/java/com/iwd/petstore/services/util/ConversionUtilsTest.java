@@ -1,6 +1,7 @@
 package com.iwd.petstore.services.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Collections;
 
@@ -19,7 +20,7 @@ public class ConversionUtilsTest {
 
 	ConversionUtils fixture = new ConversionUtilsImpl();
 	
-	// PetTo valid test values
+	// Pet valid test values
 	public static final Integer VALID_PET_ID = 1;
 	public static final String VALID_PET_NAME = "PetName";
 	public static final Integer VALID_CATEGORY_ID = 10;

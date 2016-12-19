@@ -1,4 +1,4 @@
-package com.iwd.petstore.controller;
+package com.iwd.petstore.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.iwd.petstore.controller.PetController;
+import com.iwd.petstore.services.PetController;
 import com.iwd.petstore.services.PetStoreService;
 import com.iwd.petstore.services.dao.domain.Pet;
 import com.iwd.petstore.services.dao.domain.PetPhotoURL;
