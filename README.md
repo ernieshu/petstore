@@ -1,5 +1,4 @@
 # Implementation Notes
-A change for Ravi.
 
 * For tags and categories, made FK reference tables
 
